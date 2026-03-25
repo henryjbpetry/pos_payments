@@ -1,3 +1,10 @@
 .DS_Store
 **/.DS_Store
 .localized
+
+# Personal folders — keep local only; never publish
+Embryo 2025/
+Images/
+Masters Japan/
+Writing/
+League of Legends/
