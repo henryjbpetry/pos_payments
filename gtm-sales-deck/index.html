@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>GTM investment deck — template</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --color-primary: #0059d5;
+      --color-primary-light: #3d7fe0;
+      --color-dark: #000b19;
+      --color-white: #ffffff;
+      --color-gray-100: #f5f7fa;
+      --color-gray-200: #e8ecf0;
+      --color-gray-400: #9ca3af;
+      --chart-br: #22c55e;
+      --chart-ar: #3b82f6;
+      --chart-mx: #ef4444;
+      --nav-h: 3.25rem;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--color-dark);
+      color: var(--color-gray-100);
+      line-height: 1.5;
+      padding-top: var(--nav-h);
+    }
+    .deck-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 0.35rem 0.5rem;
+      min-height: var(--nav-h);
+      padding: 0.5rem 0.75rem;
+      background: rgba(0, 11, 25, 0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      font-size: 0.72rem;
+      font-weight: 600;
+    }
+    .deck-nav a {
+      color: var(--color-gray-400);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .deck-nav a:hover { color: var(--color-primary-light); }
+    .deck-nav a[aria-current="true"] {
+      color: var(--color-white);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .deck-nav .sep { color: rgba(255, 255, 255, 0.25); user-select: none; }
+    .slide {
+      min-height: calc(100vh - var(--nav-h));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: clamp(1rem, 3vw, 2.5rem) 1rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .slide::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 120% 80% at 15% 0%, rgba(0, 89, 213, 0.2) 0%, transparent 55%),
+        radial-gradient(ellipse 90% 50% at 100% 100%, rgba(0, 68, 168, 0.15) 0%, transparent 45%),
+        var(--color-dark);
+      pointer-events: none;
+    }
+    .slide-inner {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 1100px;
+    }
+    .kicker {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-primary-light);
+      margin: 0 0 0.5rem;
+    }
+    h1, h2 {
+      font-weight: 800;
+      color: var(--color-white);
+      line-height: 1.15;
+      margin: 0 0 0.75rem;
+    }
+    h1 { font-size: clamp(1.45rem, 3vw, 2.1rem); }
+    h2 { font-size: clamp(1.2rem, 2.2vw, 1.65rem); }
+    .subtitle {
+      color: var(--color-gray-400);
+      font-size: clamp(0.9rem, 1.3vw, 1.05rem);
+      margin: 0 0 1.25rem;
+      max-width: 65ch;
+    }
+    .card-grid {
+      display: grid;
+      gap: 0.75rem;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    }
+    .card {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      padding: 1rem 1.1rem;
+    }
+    .card h3 {
+      margin: 0 0 0.5rem;
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: var(--color-white);
+    }
+    .card p { margin: 0; font-size: 0.88rem; color: var(--color-gray-200); }
+    .matrix {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.82rem;
+      margin-top: 0.5rem;
+    }
+    .matrix th, .matrix td {
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      padding: 0.45rem 0.55rem;
+      text-align: center;
+    }
+    .matrix th { background: rgba(0, 89, 213, 0.25); color: var(--color-white); font-weight: 700; }
+    .matrix td { color: var(--color-gray-200); }
+    .matrix .hl { background: rgba(94, 207, 255, 0.12); }
+    .bars {
+      display: flex;
+      align-items: flex-end;
+      gap: 0.5rem;
+      height: 160px;
+      margin-top: 1rem;
+      padding: 0 0.25rem;
+    }
+    .bar-group {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.35rem;
+    }
+    .bar {
+      width: 100%;
+      max-width: 48px;
+      border-radius: 6px 6px 2px 2px;
+      min-height: 8px;
+    }
+    .bar-label { font-size: 0.65rem; color: var(--color-gray-400); }
+    .bar-val { font-size: 0.75rem; font-weight: 700; color: var(--color-white); }
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    @media (max-width: 720px) { .split { grid-template-columns: 1fr; } }
+    .metric {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.35rem 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      font-size: 0.85rem;
+    }
+    .metric span:first-child { color: var(--color-gray-400); }
+    .metric span:last-child { font-weight: 700; color: var(--color-white); }
+    .pl-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.78rem;
+      margin-top: 0.75rem;
+    }
+    .pl-table th, .pl-table td {
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 0.4rem 0.5rem;
+    }
+    .pl-table th { text-align: left; background: rgba(255, 255, 255, 0.06); }
+    .pl-table td { text-align: right; font-variant-numeric: tabular-nums; }
+    .pl-table td:first-child { text-align: left; color: var(--color-gray-400); }
+    footer.slide {
+      min-height: auto;
+      padding: 2rem 1rem;
+      font-size: 0.8rem;
+      color: var(--color-gray-400);
+    }
+    footer.slide::before { opacity: 0.5; }
+  </style>
+</head>
+<body>
+  <nav class="deck-nav" aria-label="Slides">
+    <a href="#slide-0" data-nav>0 · Summary</a><span class="sep">|</span>
+    <a href="#slide-1" data-nav>1 · Market</a><span class="sep">|</span>
+    <a href="#slide-2" data-nav>2 · Segments</a><span class="sep">|</span>
+    <a href="#slide-3" data-nav>3 · Economics</a><span class="sep">|</span>
+    <a href="#slide-4" data-nav>4 · Ramp</a><span class="sep">|</span>
+    <a href="#slide-5" data-nav>5 · P&amp;L</a><span class="sep">|</span>
+    <a href="#slide-6" data-nav>6 · Org</a>
+  </nav>
+
+  <section class="slide" id="slide-0" tabindex="-1">
+    <div class="slide-inner">
+      <p class="kicker">Replace with your initiative</p>
+      <h1>Executive summary</h1>
+      <p class="subtitle">This is a static HTML template styled like a multi-slide GTM deck. Edit copy in <code style="color:var(--color-primary-light)">index.html</code>, then publish with GitHub Pages.</p>
+      <div class="card-grid">
+        <div class="card">
+          <h3>Market</h3>
+          <p>Describe TAM, geography, and why the opportunity deserves a dedicated thesis.</p>
+        </div>
+        <div class="card">
+          <h3>Motion</h3>
+          <p>Explain PLG vs sales-led mix and where each segment lands.</p>
+        </div>
+        <div class="card">
+          <h3>Whitespace</h3>
+          <p>Call out the wedge your team owns versus existing coverage.</p>
+        </div>
+        <div class="card">
+          <h3>Economics</h3>
+          <p>State the bundle or payback logic that makes GTM investable.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" id="slide-1">
+    <div class="slide-inner">
+      <p class="kicker">Slide 1</p>
+      <h2>Market size — illustrative split</h2>
+      <p class="subtitle">Example stacked bars (CSS only). Swap labels and heights for your model.</p>
+      <div class="split">
+        <div class="card">
+          <h3>By region</h3>
+          <div class="bars" aria-label="Example regional split">
+            <div class="bar-group">
+              <div class="bar-val">A</div>
+              <div class="bar" style="height:100px;background:linear-gradient(180deg,var(--chart-br),#15803d)"></div>
+              <div class="bar-label">Region A</div>
+            </div>
+            <div class="bar-group">
+              <div class="bar-val">B</div>
+              <div class="bar" style="height:85px;background:linear-gradient(180deg,var(--chart-ar),#1e40af)"></div>
+              <div class="bar-label">Region B</div>
+            </div>
+            <div class="bar-group">
+              <div class="bar-val">C</div>
+              <div class="bar" style="height:40px;background:linear-gradient(180deg,var(--chart-mx),#991b1b)"></div>
+              <div class="bar-label">Region C</div>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Key insights</h3>
+          <p style="font-size:0.9rem;color:var(--color-gray-200);margin:0;">Lead with one line on concentration (e.g. tail vs long tail). Add a second line on per-unit economics by country. Keep numbers in sync with your spreadsheet source of truth.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" id="slide-2">
+    <div class="slide-inner">
+      <p class="kicker">Slide 2</p>
+      <h2>Segment matrix — % of revenue or GMV</h2>
+      <p class="subtitle">Replace row/column labels and cells with your model export.</p>
+      <table class="matrix">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Low core</th>
+            <th>Mid core</th>
+            <th>High core</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Low PoS</th>
+            <td>32%</td><td>3%</td><td>1%</td><td>36%</td>
+          </tr>
+          <tr>
+            <th scope="row">Mid PoS</th>
+            <td>18%</td><td class="hl">4%</td><td>3%</td><td>25%</td>
+          </tr>
+          <tr>
+            <th scope="row">High PoS</th>
+            <td class="hl">20%</td><td>8%</td><td>7%</td><td>35%</td>
+          </tr>
+          <tr>
+            <th scope="row">Total</th>
+            <td>70%</td><td>15%</td><td>11%</td><td>96%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="slide" id="slide-3">
+    <div class="slide-inner">
+      <p class="kicker">Slide 3</p>
+      <h2>Unit economics — two cuts</h2>
+      <p class="subtitle">Mirror your spreadsheet: revenue, margin, commercial cost, payback.</p>
+      <div class="split">
+        <div class="card">
+          <h3>Segment A</h3>
+          <div class="metric"><span>Payback (bundle)</span><span>~3 mo</span></div>
+          <div class="metric"><span>Payback (single SKU)</span><span>~8 mo</span></div>
+          <div class="metric"><span>Deals / month / AE</span><span>12</span></div>
+          <div class="metric"><span>Adoption attach</span><span>50%</span></div>
+        </div>
+        <div class="card">
+          <h3>Segment B</h3>
+          <div class="metric"><span>Payback (bundle)</span><span>~2 mo</span></div>
+          <div class="metric"><span>Payback (single SKU)</span><span>~9 mo</span></div>
+          <div class="metric"><span>Deals / month / AE</span><span>7</span></div>
+          <div class="metric"><span>Adoption attach</span><span>50%</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" id="slide-4">
+    <div class="slide-inner">
+      <p class="kicker">Slide 4</p>
+      <h2>Ramp — quarter-by-quarter</h2>
+      <p class="subtitle">For chart-heavy slides, embed images exported from Sheets/Slides or add a small chart library later.</p>
+      <div class="card">
+        <h3>Cadence checklist</h3>
+        <p>Merchants live, GMV, attach rate, and GPV should move together. Note which quarter adds capacity (AEs, AMs) so the story matches hiring.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" id="slide-5">
+    <div class="slide-inner">
+      <p class="kicker">Slide 5</p>
+      <h2>P&amp;L — annual view</h2>
+      <table class="pl-table">
+        <thead>
+          <tr>
+            <th>Line</th>
+            <th>Y1</th>
+            <th>Y2</th>
+            <th>Y3</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Gross revenue</td><td>36,000</td><td>1,900,000</td><td>8,800,000</td></tr>
+          <tr><td>Gross profit</td><td>13,000</td><td>457,000</td><td>1,790,000</td></tr>
+          <tr><td>Commercial OPEX</td><td>86,000</td><td>306,000</td><td>444,000</td></tr>
+          <tr><td>Net impact</td><td>(73,000)</td><td>152,000</td><td>1,347,000</td></tr>
+        </tbody>
+      </table>
+      <p class="subtitle" style="margin-top:1rem;">Figures are placeholder examples — replace with your finance-approved export.</p>
+    </div>
+  </section>
+
+  <section class="slide" id="slide-6">
+    <div class="slide-inner">
+      <p class="kicker">Slide 6</p>
+      <h2>Org &amp; headcount</h2>
+      <p class="subtitle">EoP snapshots by role: leadership, AEs, AMs, rev ops. Tie cost rows to the P&amp;L.</p>
+      <div class="card-grid">
+        <div class="card">
+          <h3>Phase 1</h3>
+          <p>Foundation: leadership, first pod, playbooks.</p>
+        </div>
+        <div class="card">
+          <h3>Phase 2</h3>
+          <p>Scale pods; add regional management as deal flow supports it.</p>
+        </div>
+        <div class="card">
+          <h3>Phase 3</h3>
+          <p>Harvest motion: AMs and CS aligned to installed base.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="slide">
+    <div class="slide-inner">
+      <p style="margin:0;">Template generated for GitHub Pages. Update the title, nav labels, and all numbers before circulating externally.</p>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var links = document.querySelectorAll("[data-nav]");
+      var ids = Array.prototype.map.call(links, function (a) { return a.getAttribute("href").slice(1); });
+      function setCurrent() {
+        var y = window.scrollY + 80;
+        var current = ids[0];
+        for (var i = 0; i < ids.length; i++) {
+          var el = document.getElementById(ids[i]);
+          if (el && el.offsetTop <= y) current = ids[i];
+        }
+        links.forEach(function (a) {
+          a.setAttribute("aria-current", a.getAttribute("href") === "#" + current ? "true" : "false");
+        });
+      }
+      window.addEventListener("scroll", setCurrent, { passive: true });
+      setCurrent();
+    })();
+  </script>
+</body>
+</html>
