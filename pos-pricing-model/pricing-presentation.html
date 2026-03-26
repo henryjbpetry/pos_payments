@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>PDV pricing &amp; economics</title>
+  <title>PDV pricing &amp; economics — executive view</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
@@ -14,13 +14,13 @@
       --color-dark: #000b19;
       --color-white: #ffffff;
       --color-gray-100: #f5f7fa;
-      --color-gray-200: #e8ecf0;
       --color-gray-400: #9ca3af;
       --excel-header: #4472c4;
       --excel-border: #d0d7de;
       --excel-bg: #ffffff;
       --excel-alt: #f6f8fa;
       --nav-h: 3.25rem;
+      --panel: rgba(255,255,255,0.05);
     }
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
@@ -51,11 +51,7 @@
       font-size: 0.72rem;
       font-weight: 600;
     }
-    .deck-nav a {
-      color: var(--color-gray-400);
-      text-decoration: none;
-      white-space: nowrap;
-    }
+    .deck-nav a { color: var(--color-gray-400); text-decoration: none; white-space: nowrap; }
     .deck-nav a:hover { color: var(--color-primary-light); }
     .deck-nav a[aria-current="true"] {
       color: var(--color-white);
@@ -97,13 +93,143 @@
       line-height: 1.15;
       margin: 0 0 0.75rem;
     }
-    h1 { font-size: clamp(1.45rem, 3vw, 2.1rem); }
-    h2 { font-size: clamp(1.2rem, 2.2vw, 1.65rem); }
+    h1 { font-size: clamp(1.35rem, 2.8vw, 2rem); }
+    h2 { font-size: clamp(1.1rem, 2vw, 1.55rem); }
     .subtitle {
       color: var(--color-gray-400);
-      font-size: clamp(0.9rem, 1.3vw, 1.05rem);
+      font-size: clamp(0.88rem, 1.25vw, 1.02rem);
       margin: 0 0 1.25rem;
-      max-width: 70ch;
+      max-width: 72ch;
+    }
+    .insights {
+      margin: 0.5rem 0 1.25rem;
+      padding: 0;
+      list-style: none;
+    }
+    .insights li {
+      position: relative;
+      padding-left: 1.1rem;
+      margin-bottom: 0.65rem;
+      font-size: 0.92rem;
+      color: #e8ecf0;
+      line-height: 1.45;
+    }
+    .insights li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.55em;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--color-primary-light);
+    }
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 0.75rem;
+      margin-top: 0.5rem;
+    }
+    .kpi {
+      background: var(--panel);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      padding: 1rem 1rem 0.85rem;
+      text-align: center;
+    }
+    .kpi .big {
+      font-size: clamp(1.35rem, 2.5vw, 1.85rem);
+      font-weight: 800;
+      color: #fff;
+      font-variant-numeric: tabular-nums;
+      line-height: 1.2;
+    }
+    .kpi .small { font-size: 0.72rem; color: var(--color-gray-400); margin-top: 0.35rem; }
+    .chart-panel {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      padding: 1rem 1.1rem;
+      margin-top: 0.75rem;
+    }
+    .chart-title {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--color-gray-400);
+      margin: 0 0 0.75rem;
+    }
+    .hbar {
+      display: grid;
+      grid-template-columns: minmax(72px, 100px) 1fr 52px;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.45rem;
+      font-size: 0.78rem;
+    }
+    .hbar-label { color: #c9d1d9; }
+    .hbar-track {
+      height: 14px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    .hbar-fill { display: block; height: 100%; border-radius: 6px; transition: width 0.3s ease; }
+    .hbar-val { text-align: right; font-variant-numeric: tabular-nums; color: #fff; font-weight: 700; }
+    .trio-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: flex-start;
+    }
+    .trio {
+      flex: 1 1 200px;
+      min-width: 180px;
+      background: rgba(0,0,0,0.2);
+      border-radius: 10px;
+      padding: 0.75rem;
+    }
+    .trio-title { font-size: 0.8rem; font-weight: 700; color: #fff; margin: 0 0 0.5rem; }
+    .trio-bars {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-around;
+      gap: 0.5rem;
+      height: 120px;
+    }
+    .trio-col {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.25rem;
+    }
+    .trio-metric { font-size: 0.65rem; color: var(--color-gray-400); }
+    .trio-track {
+      width: 100%;
+      max-width: 36px;
+      height: 90px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 6px 6px 2px 2px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .trio-fill { display: block; width: 100%; border-radius: 4px 4px 0 0; min-height: 4px; }
+    .trio-pct { font-size: 0.72rem; font-weight: 700; color: #fff; }
+    .split-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    @media (max-width: 800px) { .split-2 { grid-template-columns: 1fr; } }
+    .footnote {
+      font-size: 0.72rem;
+      color: var(--color-gray-400);
+      margin-top: 1rem;
+      max-width: 85ch;
     }
     .excel-wrap {
       background: var(--excel-bg);
@@ -112,6 +238,8 @@
       overflow-x: auto;
       box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
       border: 1px solid rgba(255, 255, 255, 0.12);
+      max-height: 70vh;
+      overflow-y: auto;
     }
     .excel-wrap .caption {
       font-size: 0.7rem;
@@ -122,116 +250,99 @@
     .excel-table {
       width: 100%;
       border-collapse: collapse;
-      font-size: 0.72rem;
+      font-size: 0.65rem;
       font-variant-numeric: tabular-nums;
       color: #1f2328;
     }
-    .excel-table th, .excel-table td {
-      border: 1px solid var(--excel-border);
-      padding: 0.35rem 0.45rem;
-    }
+    .excel-table th, .excel-table td { border: 1px solid var(--excel-border); padding: 0.3rem 0.4rem; }
     .excel-table thead th {
       background: var(--excel-header);
       color: #fff;
       font-weight: 700;
       text-align: center;
     }
-    .excel-table thead th.corner {
-      background: #3b5998;
-      text-align: center;
-      vertical-align: middle;
-    }
+    .excel-table thead th.corner { background: #3b5998; text-align: center; vertical-align: middle; }
     .excel-table thead th.excel-h2 { background: #4a6fb5; }
-    .excel-table thead th.stone {
-      background: #2d6a4f;
-      color: #fff;
-    }
-    .excel-table td.excel-metric {
-      background: #f3f4f6;
-      color: #374151;
-      text-align: left;
-      font-weight: 500;
-      white-space: nowrap;
-    }
+    .excel-table thead th.stone { background: #2d6a4f; color: #fff; }
+    .excel-table td.excel-metric { background: #f3f4f6; color: #374151; text-align: left; font-weight: 500; }
     .excel-table tbody tr:nth-child(even) td:not(.excel-metric) { background: var(--excel-alt); }
     .excel-table td.excel-num { text-align: right; }
-    .excel-table td.stone-col {
-      background: rgba(34, 197, 94, 0.18) !important;
-      font-weight: 600;
-    }
-    .excel-table tr.spacer td {
-      height: 0.35rem;
-      border: none;
-      background: transparent !important;
-    }
-    .excel-table--compact { font-size: 0.68rem; }
-    .excel-table--compact thead th { background: #5b7fc7; }
-    .matrix {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 0.82rem;
-      margin-top: 0.5rem;
-    }
-    .matrix th, .matrix td {
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      padding: 0.45rem 0.55rem;
-      text-align: center;
-    }
-    .matrix th { background: rgba(0, 89, 213, 0.25); color: var(--color-white); font-weight: 700; }
-    .matrix td { color: var(--color-gray-200); }
+    .excel-table td.stone-col { background: rgba(34, 197, 94, 0.18) !important; font-weight: 600; }
+    .excel-table tr.spacer td { height: 0.35rem; border: none; background: transparent !important; }
     footer.slide {
       min-height: auto;
       padding: 2rem 1rem;
       font-size: 0.8rem;
       color: var(--color-gray-400);
     }
-    footer.slide::before { opacity: 0.5; }
   </style>
 </head>
 <body>
   <nav class="deck-nav" aria-label="Slides">
-    <a href="#slide-0" data-nav>0 · Title</a><span class="sep">|</span>
-    <a href="#slide-1" data-nav>1 · 2026 BC</a><span class="sep">|</span>
-    <a href="#slide-2" data-nav>2 · Market</a><span class="sep">|</span>
+    <a href="#slide-0" data-nav>0 · Summary</a><span class="sep">|</span>
+    <a href="#slide-1" data-nav>1 · Regional NOTR</a><span class="sep">|</span>
+    <a href="#slide-2" data-nav>2 · Market bands</a><span class="sep">|</span>
     <a href="#slide-3" data-nav>3 · Prazo</a><span class="sep">|</span>
-    <a href="#slide-4" data-nav>4 · Suggested</a><span class="sep">|</span>
-    <a href="#slide-5" data-nav>5 · Economics</a>
+    <a href="#slide-4" data-nav>4 · Scenarios</a><span class="sep">|</span>
+    <a href="#slide-5" data-nav>5 · Appendix</a>
   </nav>
 
   <section class="slide" id="slide-0" tabindex="-1">
     <div class="slide-inner">
-      <p class="kicker">POS / PDV · Pricing intelligence</p>
-      <h1>PDV pricing &amp; economics</h1>
-      <p class="subtitle">Presentation-style view aligned with the static GTM deck template (typography, dark slides, top nav). Competitor stats exclude promos; Stone BR economics reference column D on the <strong>2026 BC</strong> workbook.</p>
-      <table class="matrix" aria-label="Highlights">
-        <thead><tr><th>Dataset</th><th>Promo rows</th><th>Non-promo (base)</th><th>Suggested discount rule</th></tr></thead>
-        <tbody>
-          <tr><td>competitor-pricing.csv</td><td>2</td><td>13</td><td>× (1 − 0.002) vs min / mean / max</td></tr>
-        </tbody>
-      </table>
+      <p class="kicker">2026 BC · Executive readout</p>
+      <h1>BR Stone economics sit in range — market tables set the guardrails</h1>
+      <p class="subtitle">Results first: net take, lift, and gross profit from the business case; then charts for cross-country NOTR, market min/avg/max, settlement horizon, and scenario stress tests. Benchmark narrative style: <a href="https://gopedroso.github.io/PoS/GTM-Sales-investment/" style="color:var(--color-primary-light)">PoS GTM Sales Investment</a> (executive summary + charts).</p>
+      <h2 style="font-size:1rem;margin-top:0.5rem;">Key insights</h2>
+      <ul class="insights">
+        <li><strong>BR Stone (2026 BC)</strong> shows net operating take rate <strong>~0.77%</strong> on credit-card economics — with <strong>lift NOTR ~0.27%</strong> vs the modeled baseline in the workbook.</li><li>Non-promo public tables cluster <strong>credit à vista</strong> around <strong>~3.92%</strong> average (min–max spread informs guardrails, not a single price).</li><li>The pricing view uses <strong>13</strong> non-promo rows (promos excluded) so targets reflect sustainable list pricing, not acquisition promos.</li><li>Charts below translate the spreadsheet into a <strong>few decision-ready pictures</strong>; methodology and full tables stay in the Excel export.</li>
+      </ul>
+      <div class="kpi-grid">
+        <div class="kpi"><div class="big">0.77%</div><div class="small">Stone NOTR % (BR, BC)</div></div>
+        <div class="kpi"><div class="big">0.27%</div><div class="small">Lift NOTR % (BC)</div></div>
+        <div class="kpi"><div class="big">$13,461</div><div class="small">GP USD / month (Stone)</div></div>
+        <div class="kpi"><div class="big">3.92%</div><div class="small">Market avg · crédito à vista</div></div>
+      </div>
+      <p class="footnote">Promos excluded (2 rows flagged); pricing base = 13 non-promo rows. Suggested anchors use ×(1−0.002) vs min/mean/max.</p>
     </div>
   </section>
 
   <section class="slide" id="slide-1" tabindex="-1">
     <div class="slide-inner">
-      <p class="kicker">Business case · Only CC</p>
-      <h2>2026 BC — spreadsheet layout</h2>
-      <p class="subtitle">Two-row header (region + provider). <strong>Stone</strong> uses green header + column tint (Excel column D). Read-only from PDV Payments Business Case.xlsx.</p>
-      <div class="excel-wrap">
-        <p class="caption">Payments take rate scenarios — credit card only</p>
-        <table class="excel-table"><thead><tr><th rowspan="2" class="corner" scope="col">Only CC</th><th scope="col" class="excel-h2">BR</th><th scope="col" class="excel-h2">BR</th><th scope="col" class="excel-h2">MX</th><th scope="col" class="excel-h2">AR</th></tr><tr><th scope="col" class="excel-h">Getnet</th><th scope="col" class="excel-h stone">Stone</th><th scope="col" class="excel-h">Stripe</th><th scope="col" class="excel-h">dLocal QR</th></tr></thead><tbody><tr><td class="excel-metric">Processing fee</td><td class="excel-num">2.18%</td><td class="excel-num stone-col">2.18%</td><td class="excel-num">3.5%</td><td class="excel-num">0.8%</td></tr><tr><td class="excel-metric">Anticipation fee</td><td class="excel-num">3.6994%</td><td class="excel-num stone-col">3.6994%</td><td class="excel-num">1.86%</td><td class="excel-num">0%</td></tr><tr class="spacer"><td colspan="5"></td></tr><tr><td class="excel-metric">Processing cost</td><td class="excel-num">2.18%</td><td class="excel-num stone-col">2.76%</td><td class="excel-num">1.9267%</td><td class="excel-num">0.2%</td></tr><tr><td class="excel-metric">Anticipation cost</td><td class="excel-num">1.8144%</td><td class="excel-num stone-col">1.8936%</td><td class="excel-num">1.24%</td><td class="excel-num">0%</td></tr><tr class="spacer"><td colspan="5"></td></tr><tr><td class="excel-metric">NTR processing</td><td class="excel-num">0%</td><td class="excel-num stone-col">-0.58%</td><td class="excel-num">1.5733%</td><td class="excel-num">0.6%</td></tr><tr><td class="excel-metric">NTR anticipation</td><td class="excel-num">1.885%</td><td class="excel-num stone-col">1.8058%</td><td class="excel-num">0.62%</td><td class="excel-num">0%</td></tr><tr class="spacer"><td colspan="5"></td></tr><tr><td class="excel-metric">Rental costs</td><td class="excel-num">0.442%</td><td class="excel-num stone-col">0.2367%</td><td class="excel-num">0.2333%</td><td class="excel-num">0%</td></tr><tr><td class="excel-metric">Logistics costs (last mile + maintenance)</td><td class="excel-num">0.4394%</td><td class="excel-num stone-col">0%</td><td class="excel-num">—</td><td class="excel-num">0%</td></tr><tr><td class="excel-metric">KYC costs</td><td class="excel-num">—</td><td class="excel-num stone-col">—</td><td class="excel-num">—</td><td class="excel-num">—</td></tr><tr><td class="excel-metric">Antifraud costs</td><td class="excel-num">—</td><td class="excel-num stone-col">—</td><td class="excel-num">—</td><td class="excel-num">—</td></tr><tr><td class="excel-metric">Taxes</td><td class="excel-num">0.22%</td><td class="excel-num stone-col">0.22%</td><td class="excel-num">—</td><td class="excel-num">—</td></tr><tr class="spacer"><td colspan="5"></td></tr><tr><td class="excel-metric">Capex (USD, buy or store machines, yearly)</td><td class="excel-num">$5,190.91</td><td class="excel-num stone-col">—</td><td class="excel-num">$5,526.00</td><td class="excel-num">$0.00</td></tr><tr><td class="excel-metric">Capex (USD, one time)</td><td class="excel-num">$9,510.00</td><td class="excel-num stone-col">—</td><td class="excel-num">—</td><td class="excel-num">$0.00</td></tr><tr class="spacer"><td colspan="5"></td></tr><tr><td class="excel-metric">NOTR %</td><td class="excel-num">0.7837%</td><td class="excel-num stone-col">0.7692%</td><td class="excel-num">1.96%</td><td class="excel-num">0.6%</td></tr><tr><td class="excel-metric">Lift NOTR %</td><td class="excel-num">0.2837%</td><td class="excel-num stone-col">0.2692%</td><td class="excel-num">1.46%</td><td class="excel-num">0.1%</td></tr><tr><td class="excel-metric">GP usd/month</td><td class="excel-num">$13,281.32</td><td class="excel-num stone-col">$13,460.62</td><td class="excel-num">$14,074.00</td><td class="excel-num">$8,000.00</td></tr><tr><td class="excel-metric">Lift GP usd/month</td><td class="excel-num">$4,963.90</td><td class="excel-num stone-col">$4,710.62</td><td class="excel-num">$9,074.00</td><td class="excel-num">$1,000.00</td></tr><tr><td class="excel-metric"></td><td class="excel-num">—</td><td class="excel-num stone-col">13.08%</td><td class="excel-num">—</td><td class="excel-num">—</td></tr></tbody></table>
+      <p class="kicker">Only CC · Cross-country</p>
+      <h2>Net operating take rate is not uniform — Brazil Stone vs peers in the BC</h2>
+      <p class="subtitle">Horizontal bars = NOTR % from the <strong>2026 BC</strong> sheet (same row as your Excel). <span style="color:#86efac">Stone</span> is the strategic BR anchor.</p>
+      <div class="chart-panel">
+        <p class="chart-title">NOTR % by provider (model export)</p>
+        <div class="hbar">
+  <span class="hbar-label">Getnet</span>
+  <div class="hbar-track" role="img" aria-label="Getnet 0.78%"><span class="hbar-fill" style="width:34.8%;background:#3b82f6"></span></div>
+  <span class="hbar-val">0.78%</span>
+</div><div class="hbar">
+  <span class="hbar-label">Stone</span>
+  <div class="hbar-track" role="img" aria-label="Stone 0.77%"><span class="hbar-fill" style="width:34.1%;background:#22c55e"></span></div>
+  <span class="hbar-val">0.77%</span>
+</div><div class="hbar">
+  <span class="hbar-label">Stripe</span>
+  <div class="hbar-track" role="img" aria-label="Stripe 1.96%"><span class="hbar-fill" style="width:87.0%;background:#a855f7"></span></div>
+  <span class="hbar-val">1.96%</span>
+</div><div class="hbar">
+  <span class="hbar-label">dLocal QR</span>
+  <div class="hbar-track" role="img" aria-label="dLocal QR 0.60%"><span class="hbar-fill" style="width:26.6%;background:#f97316"></span></div>
+  <span class="hbar-val">0.60%</span>
+</div>
       </div>
+      <p class="footnote">Source: PDV Payments Business Case.xlsx · tab 2026 BC · read-only in the build.</p>
     </div>
   </section>
 
   <section class="slide" id="slide-2" tabindex="-1">
     <div class="slide-inner">
       <p class="kicker">Non-promo market</p>
-      <h2>Summary — min / average / max</h2>
-      <p class="subtitle">Core MDR and fee columns (CSV decimals shown as percentages).</p>
-      <div class="excel-wrap">
-        <p class="caption">competitor-pricing.csv · non-promo rows only</p>
-        <table class="excel-table excel-table--compact"><thead><tr><th>Metric</th><th>n</th><th>Min</th><th>Avg</th><th>Max</th></tr></thead><tbody><tr><td class="excel-metric">MDR débito</td><td class="excel-num">10</td><td class="excel-num">0.80%</td><td class="excel-num">1.69%</td><td class="excel-num">2.98%</td></tr><tr><td class="excel-metric">MDR crédito à vista</td><td class="excel-num">10</td><td class="excel-num">2.85%</td><td class="excel-num">3.92%</td><td class="excel-num">6.17%</td></tr><tr><td class="excel-metric">MDR crédito 12x (total)</td><td class="excel-num">8</td><td class="excel-num">3.79%</td><td class="excel-num">8.95%</td><td class="excel-num">19.00%</td></tr><tr><td class="excel-metric">MDR Pix</td><td class="excel-num">7</td><td class="excel-num">0.00%</td><td class="excel-num">0.14%</td><td class="excel-num">0.99%</td></tr><tr><td class="excel-metric">Antecipação (mensal → pontual)</td><td class="excel-num">1</td><td class="excel-num">3.70%</td><td class="excel-num">3.70%</td><td class="excel-num">3.70%</td></tr><tr><td class="excel-metric">Aluguel (BRL/mês)</td><td class="excel-num">1</td><td class="excel-num">9990.00%</td><td class="excel-num">9990.00%</td><td class="excel-num">9990.00%</td></tr></tbody></table>
+      <h2>MDR spreads show where list pricing actually lives</h2>
+      <p class="subtitle">Min / average / max from <code>competitor-pricing.csv</code> (no promos). Use bands for sensitivity — not a single “right” number.</p>
+      <div class="chart-panel">
+        <p class="chart-title">Tri-band comparison (% of GMV)</p>
+        <div class="trio-wrap"><div class="trio"><p class="trio-title">MDR débito (non-promo)</p><div class="trio-bars"><div class="trio-col"><span class="trio-metric">Min</span><div class="trio-track"><span class="trio-fill" style="height:24.4%;background:#60a5fa"></span></div><span class="trio-pct">0.80%</span></div><div class="trio-col"><span class="trio-metric">Avg</span><div class="trio-track"><span class="trio-fill" style="height:51.6%;background:#3b82f6"></span></div><span class="trio-pct">1.69%</span></div><div class="trio-col"><span class="trio-metric">Max</span><div class="trio-track"><span class="trio-fill" style="height:90.9%;background:#1d4ed8"></span></div><span class="trio-pct">2.98%</span></div></div></div><div class="trio"><p class="trio-title">MDR crédito à vista</p><div class="trio-bars"><div class="trio-col"><span class="trio-metric">Min</span><div class="trio-track"><span class="trio-fill" style="height:42.0%;background:#86efac"></span></div><span class="trio-pct">2.85%</span></div><div class="trio-col"><span class="trio-metric">Avg</span><div class="trio-track"><span class="trio-fill" style="height:57.8%;background:#22c55e"></span></div><span class="trio-pct">3.92%</span></div><div class="trio-col"><span class="trio-metric">Max</span><div class="trio-track"><span class="trio-fill" style="height:90.9%;background:#15803d"></span></div><span class="trio-pct">6.17%</span></div></div></div><div class="trio"><p class="trio-title">MDR Pix</p><div class="trio-bars"><div class="trio-col"><span class="trio-metric">Min</span><div class="trio-track"><span class="trio-fill" style="height:0.0%;background:#fcd34d"></span></div><span class="trio-pct">0.00%</span></div><div class="trio-col"><span class="trio-metric">Avg</span><div class="trio-track"><span class="trio-fill" style="height:13.0%;background:#f59e0b"></span></div><span class="trio-pct">0.14%</span></div><div class="trio-col"><span class="trio-metric">Max</span><div class="trio-track"><span class="trio-fill" style="height:90.9%;background:#b45309"></span></div><span class="trio-pct">0.99%</span></div></div></div></div>
       </div>
     </div>
   </section>
@@ -239,430 +350,92 @@
   <section class="slide" id="slide-3" tabindex="-1">
     <div class="slide-inner">
       <p class="kicker">Settlement horizon</p>
-      <h2>By prazo (liquidation days)</h2>
-      <p class="subtitle">Grouped by <code>prazo_liquidacao_aprox_dias</code> (0 = D+0 style, 14 / 30 = policy days, etc.).</p>
-      <div class="excel-wrap">
-        <p class="caption">Preview · full table in pricing-analysis-economics.xlsx</p>
-        <table border="1" class="dataframe excel-table excel-table--compact">
-  <thead>
-    <tr style="text-align: right;">
-      <th>prazo_liquidacao_aprox_dias</th>
-      <th>n_rows</th>
-      <th>mdr_debito_rate_mean</th>
-      <th>mdr_debito_rate_min</th>
-      <th>mdr_debito_rate_max</th>
-      <th>mdr_credito_vista_rate_mean</th>
-      <th>mdr_credito_vista_rate_min</th>
-      <th>mdr_credito_vista_rate_max</th>
-      <th>mdr_credito_parcelado_12x_total_rate_mean</th>
-      <th>mdr_credito_parcelado_12x_total_rate_min</th>
-      <th>mdr_credito_parcelado_12x_total_rate_max</th>
-      <th>mdr_pix_rate_mean</th>
-      <th>mdr_pix_rate_min</th>
-      <th>mdr_pix_rate_max</th>
-      <th>anticipation_rate_coalesced_mean</th>
-      <th>anticipation_rate_coalesced_min</th>
-      <th>anticipation_rate_coalesced_max</th>
-      <th>aluguel_brl_mes_mean</th>
-      <th>aluguel_brl_mes_min</th>
-      <th>aluguel_brl_mes_max</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>0</td>
-      <td>3</td>
-      <td>0.0192</td>
-      <td>0.0080</td>
-      <td>0.0298</td>
-      <td>0.0467</td>
-      <td>0.0285</td>
-      <td>0.0617</td>
-      <td>0.0742</td>
-      <td>0.0559</td>
-      <td>0.0990</td>
-      <td>0.0000</td>
-      <td>0.0000</td>
-      <td>0.0000</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <td>1</td>
-      <td>3</td>
-      <td>0.0141</td>
-      <td>0.0105</td>
-      <td>0.0190</td>
-      <td>0.0385</td>
-      <td>0.0315</td>
-      <td>0.0430</td>
-      <td>0.1365</td>
-      <td>0.0450</td>
-      <td>0.1900</td>
-      <td>0.0050</td>
-      <td>0.0000</td>
-      <td>0.0099</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>99.9000</td>
-      <td>99.9000</td>
-      <td>99.9000</td>
-    </tr>
-    <tr>
-      <td>14</td>
-      <td>1</td>
-      <td>0.0199</td>
-      <td>0.0199</td>
-      <td>0.0199</td>
-      <td>0.0399</td>
-      <td>0.0399</td>
-      <td>0.0399</td>
-      <td>0.0459</td>
-      <td>0.0459</td>
-      <td>0.0459</td>
-      <td>0.0000</td>
-      <td>0.0000</td>
-      <td>0.0000</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <td>2</td>
-      <td>1</td>
-      <td>0.0199</td>
-      <td>0.0199</td>
-      <td>0.0199</td>
-      <td>0.0349</td>
-      <td>0.0349</td>
-      <td>0.0349</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>0.0000</td>
-      <td>0.0000</td>
-      <td>0.0000</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <td>30</td>
-      <td>1</td>
-      <td>0.0199</td>
-      <td>0.0199</td>
-      <td>0.0199</td>
-      <td>0.0319</td>
-      <td>0.0319</td>
-      <td>0.0319</td>
-      <td>0.0379</td>
-      <td>0.0379</td>
-      <td>0.0379</td>
-      <td>0.0000</td>
-      <td>0.0000</td>
-      <td>0.0000</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <td>unknown</td>
-      <td>4</td>
-      <td>0.0092</td>
-      <td>0.0092</td>
-      <td>0.0092</td>
-      <td>0.0299</td>
-      <td>0.0299</td>
-      <td>0.0299</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>0.0370</td>
-      <td>0.0370</td>
-      <td>0.0370</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-  </tbody>
-</table>
+      <h2>Prazo shifts the credit à vista mean — price sensitivity follows</h2>
+      <p class="subtitle">Grouped by <code>prazo_liquidacao_aprox_dias</code> (D+0 vs D+14 / D+30 policies, etc.).</p>
+      <div class="chart-panel">
+        <p class="chart-title">Mean MDR crédito à vista by prazo bucket</p>
+        <div class="hbar">
+  <span class="hbar-label">Prazo 0 d</span>
+  <div class="hbar-track" role="img" aria-label="Prazo 0 d 4.67%"><span class="hbar-fill" style="width:90.9%;background:#38bdf8"></span></div>
+  <span class="hbar-val">4.67%</span>
+</div><div class="hbar">
+  <span class="hbar-label">Prazo 1 d</span>
+  <div class="hbar-track" role="img" aria-label="Prazo 1 d 3.85%"><span class="hbar-fill" style="width:74.9%;background:#38bdf8"></span></div>
+  <span class="hbar-val">3.85%</span>
+</div><div class="hbar">
+  <span class="hbar-label">Prazo 14 d</span>
+  <div class="hbar-track" role="img" aria-label="Prazo 14 d 3.99%"><span class="hbar-fill" style="width:77.7%;background:#38bdf8"></span></div>
+  <span class="hbar-val">3.99%</span>
+</div><div class="hbar">
+  <span class="hbar-label">Prazo 2 d</span>
+  <div class="hbar-track" role="img" aria-label="Prazo 2 d 3.49%"><span class="hbar-fill" style="width:67.9%;background:#38bdf8"></span></div>
+  <span class="hbar-val">3.49%</span>
+</div><div class="hbar">
+  <span class="hbar-label">Prazo 30 d</span>
+  <div class="hbar-track" role="img" aria-label="Prazo 30 d 3.19%"><span class="hbar-fill" style="width:62.1%;background:#38bdf8"></span></div>
+  <span class="hbar-val">3.19%</span>
+</div><div class="hbar">
+  <span class="hbar-label">Prazo unknown d</span>
+  <div class="hbar-track" role="img" aria-label="Prazo unknown d 2.99%"><span class="hbar-fill" style="width:58.2%;background:#38bdf8"></span></div>
+  <span class="hbar-val">2.99%</span>
+</div>
       </div>
     </div>
   </section>
 
   <section class="slide" id="slide-4" tabindex="-1">
     <div class="slide-inner">
-      <p class="kicker">Pricing anchors</p>
-      <h2>Suggested prices (slightly below market)</h2>
-      <p class="subtitle">Same rule as the workbook: each anchor × (1 − 0.002).</p>
-      <div class="excel-wrap">
-        <p class="caption">Sample · full long table in workbook</p>
-        <table border="1" class="dataframe excel-table excel-table--compact">
-  <thead>
-    <tr style="text-align: right;">
-      <th>metric</th>
-      <th>anchor</th>
-      <th>suggested_rate</th>
-      <th>rule</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>mdr_debito_rate</td>
-      <td>below_min</td>
-      <td>0.0080</td>
-      <td>min * (1 - 0.002)</td>
-    </tr>
-    <tr>
-      <td>mdr_debito_rate</td>
-      <td>below_avg</td>
-      <td>0.0169</td>
-      <td>mean * (1 - 0.002)</td>
-    </tr>
-    <tr>
-      <td>mdr_debito_rate</td>
-      <td>below_max</td>
-      <td>0.0297</td>
-      <td>max * (1 - 0.002)</td>
-    </tr>
-    <tr>
-      <td>mdr_credito_vista_rate</td>
-      <td>below_min</td>
-      <td>0.0284</td>
-      <td>min * (1 - 0.002)</td>
-    </tr>
-    <tr>
-      <td>mdr_credito_vista_rate</td>
-      <td>below_avg</td>
-      <td>0.0391</td>
-      <td>mean * (1 - 0.002)</td>
-    </tr>
-    <tr>
-      <td>mdr_credito_vista_rate</td>
-      <td>below_max</td>
-      <td>0.0616</td>
-      <td>max * (1 - 0.002)</td>
-    </tr>
-    <tr>
-      <td>mdr_credito_parcelado_12x_total_rate</td>
-      <td>below_min</td>
-      <td>0.0378</td>
-      <td>min * (1 - 0.002)</td>
-    </tr>
-    <tr>
-      <td>mdr_credito_parcelado_12x_total_rate</td>
-      <td>below_avg</td>
-      <td>0.0893</td>
-      <td>mean * (1 - 0.002)</td>
-    </tr>
-    <tr>
-      <td>mdr_credito_parcelado_12x_total_rate</td>
-      <td>below_max</td>
-      <td>0.1896</td>
-      <td>max * (1 - 0.002)</td>
-    </tr>
-    <tr>
-      <td>mdr_credito_parcelado_6x_total_rate</td>
-      <td>below_min</td>
-      <td>0.1062</td>
-      <td>min * (1 - 0.002)</td>
-    </tr>
-    <tr>
-      <td>mdr_credito_parcelado_6x_total_rate</td>
-      <td>below_avg</td>
-      <td>0.1095</td>
-      <td>mean * (1 - 0.002)</td>
-    </tr>
-    <tr>
-      <td>mdr_credito_parcelado_6x_total_rate</td>
-      <td>below_max</td>
-      <td>0.1128</td>
-      <td>max * (1 - 0.002)</td>
-    </tr>
-    <tr>
-      <td>mdr_parcela_12x_rate</td>
-      <td>below_min</td>
-      <td>0.0141</td>
-      <td>min * (1 - 0.002)</td>
-    </tr>
-    <tr>
-      <td>mdr_parcela_12x_rate</td>
-      <td>below_avg</td>
-      <td>0.0141</td>
-      <td>mean * (1 - 0.002)</td>
-    </tr>
-    <tr>
-      <td>mdr_parcela_12x_rate</td>
-      <td>below_max</td>
-      <td>0.0141</td>
-      <td>max * (1 - 0.002)</td>
-    </tr>
-    <tr>
-      <td>mdr_pix_rate</td>
-      <td>below_min</td>
-      <td>0.0000</td>
-      <td>min * (1 - 0.002)</td>
-    </tr>
-    <tr>
-      <td>mdr_pix_rate</td>
-      <td>below_avg</td>
-      <td>0.0014</td>
-      <td>mean * (1 - 0.002)</td>
-    </tr>
-    <tr>
-      <td>mdr_pix_rate</td>
-      <td>below_max</td>
-      <td>0.0099</td>
-      <td>max * (1 - 0.002)</td>
-    </tr>
-  </tbody>
-</table>
+      <p class="kicker">Stress tests</p>
+      <h2>Scenario NOTR moves when fees move — costs fixed from BC</h2>
+      <p class="subtitle">Illustrative linear GP scaling in the workbook; chart shows <strong>estimated NOTR %</strong> per scenario.</p>
+      <div class="chart-panel">
+        <p class="chart-title">NOTR % (estimated) by scenario</p>
+        <div class="hbar">
+  <span class="hbar-label">BC baseline stone</span>
+  <div class="hbar-track" role="img" aria-label="BC baseline stone 0.77%"><span class="hbar-fill" style="width:14.7%;background:#22c55e"></span></div>
+  <span class="hbar-val">0.77%</span>
+</div><div class="hbar">
+  <span class="hbar-label">below market min proc only hold bc ant</span>
+  <div class="hbar-track" role="img" aria-label="below market min proc only hold bc ant 1.43%"><span class="hbar-fill" style="width:27.5%;background:#3b82f6"></span></div>
+  <span class="hbar-val">1.43%</span>
+</div><div class="hbar">
+  <span class="hbar-label">below market avg proc only hold bc ant</span>
+  <div class="hbar-track" role="img" aria-label="below market avg proc only hold bc ant 2.50%"><span class="hbar-fill" style="width:47.9%;background:#a855f7"></span></div>
+  <span class="hbar-val">2.50%</span>
+</div><div class="hbar">
+  <span class="hbar-label">below market max proc only hold bc ant</span>
+  <div class="hbar-track" role="img" aria-label="below market max proc only hold bc ant 4.75%"><span class="hbar-fill" style="width:90.9%;background:#f97316"></span></div>
+  <span class="hbar-val">4.75%</span>
+</div><div class="hbar">
+  <span class="hbar-label">below market min ant only hold bc proc</span>
+  <div class="hbar-track" role="img" aria-label="below market min ant only hold bc proc 0.76%"><span class="hbar-fill" style="width:14.6%;background:#ec4899"></span></div>
+  <span class="hbar-val">0.76%</span>
+</div><div class="hbar">
+  <span class="hbar-label">below avg credito and avg anticipation</span>
+  <div class="hbar-track" role="img" aria-label="below avg credito and avg anticipation 2.50%"><span class="hbar-fill" style="width:47.8%;background:#14b8a6"></span></div>
+  <span class="hbar-val">2.50%</span>
+</div>
       </div>
+      <p class="footnote">Full scenario table and GP estimates: <strong>pricing-analysis-economics.xlsx</strong>.</p>
     </div>
   </section>
 
   <section class="slide" id="slide-5" tabindex="-1">
     <div class="slide-inner">
-      <p class="kicker">Stone BR · scenarios</p>
-      <h2>Economics scenarios (BC costs fixed)</h2>
-      <p class="subtitle">Illustrative NOTR and linear GP scaling vs baseline — see methodology_notes in the Excel export.</p>
+      <p class="kicker">Appendix</p>
+      <h2>Methodology + full BC matrix</h2>
+      <p class="subtitle"><strong>How we got here:</strong> promo filter on scenario IDs; coalesced anticipation (mensal → pontual); BC Stone column D for fee inputs; NOTR ≈ NTR sum − rent/logistics/taxes. Below: the same <em>Only CC</em> table as your spreadsheet for audit.</p>
       <div class="excel-wrap">
-        <p class="caption">economics_scenarios</p>
-        <table border="1" class="dataframe excel-table excel-table--compact">
-  <thead>
-    <tr style="text-align: right;">
-      <th>scenario</th>
-      <th>processing_fee_assumption</th>
-      <th>anticipation_fee_assumption</th>
-      <th>processing_cost_bc</th>
-      <th>anticipation_cost_bc</th>
-      <th>ntr_processing</th>
-      <th>ntr_anticipation</th>
-      <th>ntr_sum</th>
-      <th>opex_fixed_rent_log_tax</th>
-      <th>notr_estimated</th>
-      <th>gp_usd_month_estimated_linear</th>
-      <th>notr_bc_reference</th>
-      <th>gp_usd_month_bc</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>BC_baseline_stone</td>
-      <td>0.021800</td>
-      <td>0.036994</td>
-      <td>0.027600</td>
-      <td>0.018936</td>
-      <td>-0.005800</td>
-      <td>0.018058</td>
-      <td>0.012258</td>
-      <td>0.004567</td>
-      <td>0.007692</td>
-      <td>13460.622423</td>
-      <td>0.007692</td>
-      <td>13460.622430</td>
-    </tr>
-    <tr>
-      <td>suggested_below_market_min_proc_only_hold_bc_ant</td>
-      <td>0.028443</td>
-      <td>0.036994</td>
-      <td>0.027600</td>
-      <td>0.018936</td>
-      <td>0.000843</td>
-      <td>0.018058</td>
-      <td>0.018901</td>
-      <td>0.004567</td>
-      <td>0.014335</td>
-      <td>25085.872421</td>
-      <td>0.007692</td>
-      <td>13460.622430</td>
-    </tr>
-    <tr>
-      <td>suggested_below_market_avg_proc_only_hold_bc_ant</td>
-      <td>0.039132</td>
-      <td>0.036994</td>
-      <td>0.027600</td>
-      <td>0.018936</td>
-      <td>0.011532</td>
-      <td>0.018058</td>
-      <td>0.029590</td>
-      <td>0.004567</td>
-      <td>0.025023</td>
-      <td>43790.887418</td>
-      <td>0.007692</td>
-      <td>13460.622430</td>
-    </tr>
-    <tr>
-      <td>suggested_below_market_max_proc_only_hold_bc_ant</td>
-      <td>0.061577</td>
-      <td>0.036994</td>
-      <td>0.027600</td>
-      <td>0.018936</td>
-      <td>0.033977</td>
-      <td>0.018058</td>
-      <td>0.052035</td>
-      <td>0.004567</td>
-      <td>0.047468</td>
-      <td>83069.672411</td>
-      <td>0.007692</td>
-      <td>13460.622430</td>
-    </tr>
-    <tr>
-      <td>suggested_below_market_min_ant_only_hold_bc_proc</td>
-      <td>0.021800</td>
-      <td>0.036926</td>
-      <td>0.027600</td>
-      <td>0.018936</td>
-      <td>-0.005800</td>
-      <td>0.017990</td>
-      <td>0.012190</td>
-      <td>0.004567</td>
-      <td>0.007623</td>
-      <td>13340.833331</td>
-      <td>0.007692</td>
-      <td>13460.622430</td>
-    </tr>
-    <tr>
-      <td>suggested_below_avg_credito_and_avg_anticipation</td>
-      <td>0.039132</td>
-      <td>0.036926</td>
-      <td>0.027600</td>
-      <td>0.018936</td>
-      <td>0.011532</td>
-      <td>0.017990</td>
-      <td>0.029522</td>
-      <td>0.004567</td>
-      <td>0.024955</td>
-      <td>43671.098325</td>
-      <td>0.007692</td>
-      <td>13460.622430</td>
-    </tr>
-  </tbody>
-</table>
+        <p class="caption">2026 BC — Payments take rate (credit card only)</p>
+        <table class="excel-table"><thead><tr><th rowspan="2" class="corner" scope="col">Only CC</th><th scope="col" class="excel-h2">BR</th><th scope="col" class="excel-h2">BR</th><th scope="col" class="excel-h2">MX</th><th scope="col" class="excel-h2">AR</th></tr><tr><th scope="col" class="excel-h">Getnet</th><th scope="col" class="excel-h stone">Stone</th><th scope="col" class="excel-h">Stripe</th><th scope="col" class="excel-h">dLocal QR</th></tr></thead><tbody><tr><td class="excel-metric">Processing fee</td><td class="excel-num">2.18%</td><td class="excel-num stone-col">2.18%</td><td class="excel-num">3.5%</td><td class="excel-num">0.8%</td></tr><tr><td class="excel-metric">Anticipation fee</td><td class="excel-num">3.6994%</td><td class="excel-num stone-col">3.6994%</td><td class="excel-num">1.86%</td><td class="excel-num">0%</td></tr><tr class="spacer"><td colspan="5"></td></tr><tr><td class="excel-metric">Processing cost</td><td class="excel-num">2.18%</td><td class="excel-num stone-col">2.76%</td><td class="excel-num">1.9267%</td><td class="excel-num">0.2%</td></tr><tr><td class="excel-metric">Anticipation cost</td><td class="excel-num">1.8144%</td><td class="excel-num stone-col">1.8936%</td><td class="excel-num">1.24%</td><td class="excel-num">0%</td></tr><tr class="spacer"><td colspan="5"></td></tr><tr><td class="excel-metric">NTR processing</td><td class="excel-num">0%</td><td class="excel-num stone-col">-0.58%</td><td class="excel-num">1.5733%</td><td class="excel-num">0.6%</td></tr><tr><td class="excel-metric">NTR anticipation</td><td class="excel-num">1.885%</td><td class="excel-num stone-col">1.8058%</td><td class="excel-num">0.62%</td><td class="excel-num">0%</td></tr><tr class="spacer"><td colspan="5"></td></tr><tr><td class="excel-metric">Rental costs</td><td class="excel-num">0.442%</td><td class="excel-num stone-col">0.2367%</td><td class="excel-num">0.2333%</td><td class="excel-num">0%</td></tr><tr><td class="excel-metric">Logistics costs (last mile + maintenance)</td><td class="excel-num">0.4394%</td><td class="excel-num stone-col">0%</td><td class="excel-num">—</td><td class="excel-num">0%</td></tr><tr><td class="excel-metric">KYC costs</td><td class="excel-num">—</td><td class="excel-num stone-col">—</td><td class="excel-num">—</td><td class="excel-num">—</td></tr><tr><td class="excel-metric">Antifraud costs</td><td class="excel-num">—</td><td class="excel-num stone-col">—</td><td class="excel-num">—</td><td class="excel-num">—</td></tr><tr><td class="excel-metric">Taxes</td><td class="excel-num">0.2200%%</td><td class="excel-num stone-col">0.2200%%</td><td class="excel-num">—</td><td class="excel-num">—</td></tr><tr class="spacer"><td colspan="5"></td></tr><tr><td class="excel-metric">Capex (USD, buy or store machines, yearly)</td><td class="excel-num">$5,190.91</td><td class="excel-num stone-col">—</td><td class="excel-num">$5,526.00</td><td class="excel-num">$0.00</td></tr><tr><td class="excel-metric">Capex (USD, one time)</td><td class="excel-num">$9,510.00</td><td class="excel-num stone-col">—</td><td class="excel-num">—</td><td class="excel-num">$0.00</td></tr><tr class="spacer"><td colspan="5"></td></tr><tr><td class="excel-metric">NOTR %</td><td class="excel-num">0.7837%</td><td class="excel-num stone-col">0.7692%</td><td class="excel-num">1.96%</td><td class="excel-num">0.6%</td></tr><tr><td class="excel-metric">Lift NOTR %</td><td class="excel-num">0.2837%</td><td class="excel-num stone-col">0.2692%</td><td class="excel-num">1.46%</td><td class="excel-num">0.1%</td></tr><tr><td class="excel-metric">GP usd/month</td><td class="excel-num">$13,281.32</td><td class="excel-num stone-col">$13,460.62</td><td class="excel-num">$14,074.00</td><td class="excel-num">$8,000.00</td></tr><tr><td class="excel-metric">Lift GP usd/month</td><td class="excel-num">$4,963.90</td><td class="excel-num stone-col">$4,710.62</td><td class="excel-num">$9,074.00</td><td class="excel-num">$1,000.00</td></tr><tr><td class="excel-metric"></td><td class="excel-num">—</td><td class="excel-num stone-col">13.08%</td><td class="excel-num">—</td><td class="excel-num">—</td></tr></tbody></table>
       </div>
+      <p class="footnote">Regenerate: <code style="color:var(--color-primary-light)">python3 build_pricing_analysis.py</code></p>
     </div>
   </section>
 
   <footer class="slide">
     <div class="slide-inner">
-      <p style="margin:0;">Regenerate with <code style="color:var(--color-primary-light)">python3 build_pricing_analysis.py</code> (writes the workbook and this HTML). Deck chrome matches <strong>gtm-sales-deck</strong>; data tables use a light Excel-style panel on dark slides.</p>
+      <p style="margin:0;">Static HTML — no charting SDK. Bars are CSS. For a comparable executive narrative flow see the PoS GTM reference deck.</p>
     </div>
   </footer>
 

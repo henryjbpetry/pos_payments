@@ -362,6 +362,7 @@ def main() -> None:
         by_prazo_df,
         scen_df,
         suggested_df,
+        stone,
         n_promo=len(promo),
         n_non_promo=len(non),
         eps=EPS,
