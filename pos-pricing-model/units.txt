@@ -1,0 +1,13 @@
+competitor-pricing.csv
+
+- All mdr_* and taxa_antecipacao_* values are decimal rates on [0,1]: 0.0199 means 1.99%.
+- Excel/Google: receita_liquida = TPV * mdr_debito_rate (same unit).
+- prazo_liquidacao_aprox_dias: 0 = imediato/na hora (D+0); 1 = D+1; 2 = D+2 (ex. comparadores Rede); 14 ou 30 = politica de credito em N dias corridos (PagBank).
+- aluguel_brl_mes: aluguel quando aplicavel; combinar com aluguel_threshold_faturamento_brl (isencao tipicamente acima desse faturamento mensal).
+- compra_maquininha_brl_avista: preco representativo de aquisicao (um modelo); detalhes em notas.
+
+competitor-pricing-alternative-sources.csv
+
+- Mesma convencao de taxas decimais para min/max.
+- confianca_score: 0 a 1 (heuristica; nao e estatistica).
+- Campos vazios = nao aplicavel ou nao extraido.

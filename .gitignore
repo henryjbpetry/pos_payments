@@ -8,3 +8,8 @@ Images/
 Masters Japan/
 Writing/
 League of Legends/
+
+# POS pricing model — local deps and confidential inputs (HTML is committed under pricing-deck/)
+pos-pricing-model/_pydeps/
+pos-pricing-model/PDV Payments Business Case.xlsx
+pos-pricing-model/pricing-analysis-economics.xlsx
