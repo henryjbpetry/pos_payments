@@ -6,6 +6,7 @@ from __future__ import annotations
 
 import html
 import re
+from datetime import datetime, timezone
 from typing import Any
 
 import pandas as pd
@@ -34,8 +35,8 @@ def _fmt_bc_value(label: str, val: Any) -> str:
     if "notr" in lab or "ntr" in lab or "fee" in lab or "cost" in lab:
         return f"{v * 100:.4f}".rstrip("0").rstrip(".") + "%"
     if "rental" in lab or "logistics" in lab or "taxes" in lab:
-        return f"{v * 100:.4f}%".rstrip("0").rstrip(".") + "%"
-    return f"{v * 100:.4f}%".rstrip("0").rstrip(".") + "%"
+        return f"{v * 100:.4f}".rstrip("0").rstrip(".") + "%"
+    return f"{v * 100:.4f}".rstrip("0").rstrip(".") + "%"
 
 
 def _read_bc_matrix(bc_path: str) -> tuple[list[str], list[str], list[tuple[str | None, list[Any]]]]:
@@ -150,7 +151,9 @@ def write_presentation_html(
     n_promo: int,
     n_non_promo: int,
     eps: float,
+    build_stamp: str | None = None,
 ) -> None:
+    stamp = build_stamp or datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
     regions, providers, bc_rows = _read_bc_matrix(bc_path)
     bc_table_inner = _build_bc_table_html(regions, providers, bc_rows)
 
@@ -271,7 +274,11 @@ def write_presentation_html(
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta name="pricing-deck-build" content="{_esc(stamp)}" />
   <title>{_esc(title)} — executive view</title>
+  <!-- pricing-deck generated { _esc(stamp) } — if the site looks stale, hard-refresh (e.g. Cmd+Shift+R) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />

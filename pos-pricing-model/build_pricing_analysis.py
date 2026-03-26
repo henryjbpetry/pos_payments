@@ -8,6 +8,7 @@ from __future__ import annotations
 import os
 import shutil
 import sys
+from datetime import datetime, timezone
 
 _DEPS = os.path.join(os.path.dirname(os.path.abspath(__file__)), "_pydeps")
 if os.path.isdir(_DEPS):
@@ -366,6 +367,7 @@ def main() -> None:
         n_promo=len(promo),
         n_non_promo=len(non),
         eps=EPS,
+        build_stamp=datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
     )
     print(f"Wrote {OUT_HTML}")
 
