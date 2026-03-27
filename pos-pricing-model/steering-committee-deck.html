@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>POS · Pricing strategy — Steering committee</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #000b19;
+      --text: #e8ecf0;
+      --muted: #9ca3af;
+      --accent: #3d7fe0;
+      --primary: #0059d5;
+      --br: #22c55e;
+      --ar: #3b82f6;
+      --mx: #ef4444;
+      --panel: rgba(255, 255, 255, 0.05);
+      --border: rgba(255, 255, 255, 0.1);
+      --nav-h: 3.1rem;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.45;
+      padding-top: var(--nav-h);
+      font-size: 0.92rem;
+    }
+    .deck-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 0.35rem 0.45rem;
+      min-height: var(--nav-h);
+      padding: 0.45rem 0.75rem;
+      background: rgba(0, 11, 25, 0.94);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      font-size: 0.72rem;
+      font-weight: 600;
+    }
+    .deck-nav a {
+      color: var(--muted);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .deck-nav a:hover { color: var(--accent); }
+    .deck-nav a[aria-current="true"] { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
+    .deck-nav .sep { color: rgba(255, 255, 255, 0.25); user-select: none; }
+    .slide {
+      min-height: calc(100vh - var(--nav-h));
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: clamp(1rem, 2.5vw, 2rem) 1rem 2.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .slide::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 120% 80% at 12% 0%, rgba(0, 89, 213, 0.22) 0%, transparent 55%),
+        radial-gradient(ellipse 90% 50% at 100% 100%, rgba(0, 68, 168, 0.14) 0%, transparent 45%),
+        var(--bg);
+      pointer-events: none;
+    }
+    .slide-inner {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 1120px;
+    }
+    .kicker {
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin: 0 0 0.45rem;
+    }
+    h1, h2 {
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.15;
+      margin: 0 0 0.6rem;
+    }
+    h1 { font-size: clamp(1.35rem, 2.8vw, 1.95rem); }
+    h2 { font-size: clamp(1.15rem, 2.2vw, 1.5rem); }
+    .subtitle {
+      color: var(--muted);
+      font-size: clamp(0.88rem, 1.2vw, 1rem);
+      margin: 0 0 1rem;
+      max-width: 70ch;
+    }
+    .country-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.85rem;
+    }
+    @media (max-width: 900px) {
+      .country-grid { grid-template-columns: 1fr; }
+    }
+    .country-card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1rem 1.1rem 1.15rem;
+      min-height: 280px;
+      display: flex;
+      flex-direction: column;
+    }
+    .country-head {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.35rem;
+    }
+    .flag {
+      font-size: 1.75rem;
+      line-height: 1;
+    }
+    .country-name {
+      font-size: 1.05rem;
+      font-weight: 800;
+      margin: 0;
+    }
+    .country-name.br { color: var(--br); }
+    .country-name.ar { color: var(--ar); }
+    .country-name.mx { color: #fca5a5; }
+    .country-sub {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin: 0 0 0.85rem;
+      line-height: 1.35;
+    }
+    .exec-bullets {
+      margin: 0;
+      padding-left: 1.1rem;
+      flex: 1;
+      font-size: 0.86rem;
+      color: var(--text);
+    }
+    .exec-bullets li { margin-bottom: 0.45rem; }
+    .placeholder-block {
+      list-style: none;
+      margin: 0.35rem 0 0;
+      padding: 0;
+    }
+    .placeholder-block li {
+      border: 1px dashed rgba(255, 255, 255, 0.2);
+      border-radius: 6px;
+      min-height: 1.35rem;
+      margin-bottom: 0.4rem;
+      background: rgba(255, 255, 255, 0.02);
+    }
+    .insights-box {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 0.9rem 1.1rem;
+      margin-bottom: 1rem;
+    }
+    .insights-box ul { margin: 0; padding-left: 1.15rem; }
+    .insights-box li { margin-bottom: 0.4rem; font-size: 0.86rem; }
+    .split-eco {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    @media (max-width: 820px) {
+      .split-eco { grid-template-columns: 1fr; }
+    }
+    .eco-panel {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 0.85rem 1rem;
+    }
+    .eco-panel h3 {
+      margin: 0 0 0.5rem;
+      font-size: 1rem;
+      font-weight: 800;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+    }
+    .eco-panel .prov { font-size: 0.78rem; font-weight: 700; color: var(--accent); }
+    .eco-panel.br h3 .name { color: var(--br); }
+    .eco-panel.ar h3 .name { color: var(--ar); }
+    .mini-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.74rem;
+      margin: 0.5rem 0;
+    }
+    .mini-table th, .mini-table td {
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 0.3rem 0.4rem;
+      text-align: left;
+    }
+    .mini-table th { background: rgba(0, 89, 213, 0.2); color: #fff; }
+    .mini-table td.num { text-align: right; font-variant-numeric: tabular-nums; }
+    .segment-block {
+      margin-top: 0.65rem;
+      padding-top: 0.65rem;
+      border-top: 1px solid var(--border);
+    }
+    .segment-block h4 {
+      margin: 0 0 0.35rem;
+      font-size: 0.82rem;
+      color: var(--accent);
+    }
+    .payback {
+      font-size: 0.8rem;
+      margin-bottom: 0.35rem;
+    }
+    .metric-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.5rem;
+      font-size: 0.72rem;
+      padding: 0.2rem 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+    .metric-row span:first-child { color: var(--muted); }
+    .metric-row span:last-child { font-weight: 700; color: #fff; font-variant-numeric: tabular-nums; }
+    .source-foot {
+      font-size: 0.72rem;
+      color: var(--muted);
+      margin-top: 0.75rem;
+    }
+    .source-foot a { color: var(--accent); }
+
+    /* Gantt */
+    .gantt-wrap {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 0.75rem 0.75rem 0.5rem;
+      overflow-x: auto;
+    }
+    .gantt {
+      --row-h: 26px;
+      --gantt-w: min(100%, 720px);
+      display: grid;
+      grid-template-columns: minmax(200px, 280px) 1fr;
+      gap: 0.35rem 0.5rem;
+      align-items: center;
+      min-width: 640px;
+    }
+    .gantt-months {
+      grid-column: 2;
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.65rem;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      padding: 0 0 0.25rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 0.15rem;
+    }
+    .gantt-row-label {
+      font-size: 0.68rem;
+      line-height: 1.25;
+      color: var(--text);
+      padding: 0.15rem 0;
+    }
+    .gantt-track {
+      position: relative;
+      height: var(--row-h);
+      background: rgba(0, 0, 0, 0.25);
+      border-radius: 4px;
+    }
+    .gantt-bar {
+      position: absolute;
+      top: 3px;
+      height: calc(var(--row-h) - 6px);
+      border-radius: 4px;
+      min-width: 3px;
+    }
+    .gantt-bar.gtm-br { background: linear-gradient(90deg, #16a34a, var(--br)); }
+    .gantt-bar.gtm-ar { background: linear-gradient(90deg, #1d4ed8, var(--ar)); }
+    .gantt-bar.launch-br { background: linear-gradient(90deg, #14532d, #15803d); }
+    .gantt-bar.launch-ar { background: linear-gradient(90deg, #1e3a8a, #2563eb); }
+    .legend-gantt {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem;
+      margin-top: 0.65rem;
+      font-size: 0.68rem;
+      color: var(--muted);
+    }
+    .legend-gantt span { display: flex; align-items: center; gap: 0.35rem; }
+    .dot { width: 10px; height: 10px; border-radius: 2px; }
+
+    .principles-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 0.65rem;
+    }
+    .principle-card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 0.65rem 0.85rem;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #fff;
+      display: flex;
+      gap: 0.6rem;
+      align-items: flex-start;
+    }
+    .principle-card .n {
+      flex-shrink: 0;
+      width: 1.5rem;
+      height: 1.5rem;
+      border-radius: 6px;
+      background: rgba(0, 89, 213, 0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.72rem;
+      font-weight: 800;
+    }
+
+    .framework-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    @media (max-width: 800px) {
+      .framework-split { grid-template-columns: 1fr; }
+    }
+    .bucket {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1rem 1.15rem;
+    }
+    .bucket h3 {
+      margin: 0 0 0.65rem;
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--accent);
+      padding-bottom: 0.4rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .bucket ul { margin: 0; padding-left: 1.1rem; font-size: 0.86rem; color: var(--text); }
+    .bucket li { margin-bottom: 0.45rem; }
+  </style>
+</head>
+<body>
+  <nav class="deck-nav" aria-label="Slides">
+    <a href="#slide-0" data-nav>0 · Where we are</a><span class="sep">|</span>
+    <a href="#slide-1" data-nav>1 · Business case</a><span class="sep">|</span>
+    <a href="#slide-2" data-nav>2 · Roadmap</a><span class="sep">|</span>
+    <a href="#slide-3" data-nav>3 · Principles</a><span class="sep">|</span>
+    <a href="#slide-4" data-nav>4 · Discussion</a>
+  </nav>
+
+  <!-- 0 -->
+  <section class="slide" id="slide-0" tabindex="-1">
+    <div class="slide-inner">
+      <p class="kicker">POS · Pricing strategy · Steering committee</p>
+      <h1>Where we are</h1>
+      <p class="subtitle">Country posture and updates — executive snapshot. Fill placeholders before the session.</p>
+      <div class="country-grid">
+        <article class="country-card">
+          <div class="country-head">
+            <span class="flag" aria-hidden="true">🇧🇷</span>
+            <h2 class="country-name br">Brazil</h2>
+          </div>
+          <p class="country-sub">Offline payments · <strong>Stone</strong> · largest store count; anchor for testing and scale.</p>
+          <ul class="exec-bullets">
+            <li>Strategic posture: <em>(add update)</em></li>
+            <li>Pricing / GTM: <em>(add update)</em></li>
+            <li>Risks / dependencies: <em>(add update)</em></li>
+          </ul>
+          <ul class="placeholder-block" aria-label="Space for additional notes"><li></li><li></li></ul>
+        </article>
+        <article class="country-card">
+          <div class="country-head">
+            <span class="flag" aria-hidden="true">🇦🇷</span>
+            <h2 class="country-name ar">Argentina</h2>
+          </div>
+          <p class="country-sub">Offline payments · <strong>dLocal</strong> · QR-led motion; higher dollars per store in model.</p>
+          <ul class="exec-bullets">
+            <li>Strategic posture: <em>(add update)</em></li>
+            <li>Pricing / GTM: <em>(add update)</em></li>
+            <li>Risks / dependencies: <em>(add update)</em></li>
+          </ul>
+          <ul class="placeholder-block" aria-label="Space for additional notes"><li></li><li></li></ul>
+        </article>
+        <article class="country-card">
+          <div class="country-head">
+            <span class="flag" aria-hidden="true">🇲🇽</span>
+            <h2 class="country-name mx">Mexico</h2>
+          </div>
+          <p class="country-sub">Later phase unless strategy shifts — lock <strong>local payment economics</strong> and <strong>FX</strong> before committing.</p>
+          <ul class="exec-bullets">
+            <li>Strategic posture: <em>(add update)</em></li>
+            <li>Pricing / GTM: <em>(add update)</em></li>
+            <li>Risks / dependencies: <em>(add update)</em></li>
+          </ul>
+          <ul class="placeholder-block" aria-label="Space for additional notes"><li></li><li></li></ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 1 -->
+  <section class="slide" id="slide-1" tabindex="-1">
+    <div class="slide-inner">
+      <p class="kicker">Where we’re going · Updated business case</p>
+      <h1>The economics justify a sales-led bet — if we sell the stack, not PoS alone</h1>
+      <p class="subtitle">Modeled unit economics for Brazil and Argentina: Upper SMB vs UpMarket, monthly USD per AE. Aligns with the <a href="https://gopedroso.github.io/PoS/GTM-Sales-investment/" style="color:var(--accent)">PoS GTM · Sales investment</a> deck (Slide 3).</p>
+
+      <div class="insights-box">
+        <strong style="color:#fff;font-size:0.88rem">Key insights</strong>
+        <ul>
+          <li><strong>Speed to value:</strong> With <strong>PoS + offline payments</strong> at modeled adoption, total payback sits near <strong>two to three months</strong> — enough room to fund a <strong>direct sales</strong> motion if execution holds.</li>
+          <li><strong>Strategic implication:</strong> <strong>PoS-only</strong> payback sits near <strong>~8 months</strong> in this model versus a few months bundled — the executive narrative is <strong>full-stack penetration</strong>, not PoS as a standalone SKU.</li>
+          <li><strong>Segment &amp; geography:</strong> <strong>UpMarket</strong> delivers fewer deals but materially higher monthly revenue and margin; <strong>Argentina UpMarket</strong> shows the tightest payback in this export.</li>
+          <li><strong>Footprint:</strong> <strong>Mexico</strong> is out of scope here — roll the same frame once <strong>local payment economics and FX</strong> are locked.</li>
+        </ul>
+      </div>
+
+      <div class="split-eco">
+        <div class="eco-panel br">
+          <h3><span class="name">Brazil</span> <span class="prov">Offline payments · Stone</span></h3>
+          <table class="mini-table" aria-label="Brazil SaaS assumptions">
+            <thead><tr><th colspan="2">PoS — SaaS assumptions</th></tr></thead>
+            <tbody>
+              <tr><td>PoS take-rate (% of GMV)</td><td class="num">0.25%</td></tr>
+              <tr><td>PoS subscription (USD/mo)</td><td class="num">13.1</td></tr>
+              <tr><td>Gross margin PoS</td><td class="num">75.0%</td></tr>
+            </tbody>
+          </table>
+          <div class="segment-block">
+            <h4>Upper SMB · GMV US$5k–20k/mo · Avg GMV US$9,963/mo</h4>
+            <p class="payback"><strong>2.9 mo</strong> payback (total) · PoS-only <strong>7.6 mo</strong></p>
+            <div class="metric-row"><span>Deals / month</span><span>15</span></div>
+            <div class="metric-row"><span>Revenue total</span><span>US$4,964</span></div>
+            <div class="metric-row"><span>Gross margin total</span><span>US$1,139</span></div>
+            <div class="metric-row"><span>Commercial cost</span><span>US$3,248</span></div>
+          </div>
+          <div class="segment-block">
+            <h4>UpMarket · GMV US$20k–200k/mo · Avg GMV US$36,917/mo</h4>
+            <p class="payback"><strong>2.8 mo</strong> payback (total) · PoS-only <strong>8.8 mo</strong></p>
+            <div class="metric-row"><span>Deals / month</span><span>7</span></div>
+            <div class="metric-row"><span>Revenue total</span><span>US$8,336</span></div>
+            <div class="metric-row"><span>Gross margin total</span><span>US$1,720</span></div>
+            <div class="metric-row"><span>Commercial cost</span><span>US$4,872</span></div>
+          </div>
+        </div>
+
+        <div class="eco-panel ar">
+          <h3><span class="name">Argentina</span> <span class="prov">Offline payments · dLocal</span></h3>
+          <table class="mini-table" aria-label="Argentina SaaS assumptions">
+            <thead><tr><th colspan="2">PoS — SaaS assumptions</th></tr></thead>
+            <tbody>
+              <tr><td>PoS take-rate (% of GMV)</td><td class="num">0.25%</td></tr>
+              <tr><td>PoS subscription (USD/mo)</td><td class="num">22.0</td></tr>
+              <tr><td>Gross margin PoS</td><td class="num">75.0%</td></tr>
+            </tbody>
+          </table>
+          <div class="segment-block">
+            <h4>Upper SMB · GMV US$5k–20k/mo · Avg GMV US$7,807/mo</h4>
+            <p class="payback"><strong>2.7 mo</strong> payback (total) · PoS-only <strong>8.2 mo</strong></p>
+            <div class="metric-row"><span>Deals / month</span><span>15</span></div>
+            <div class="metric-row"><span>Revenue total</span><span>US$6,386</span></div>
+            <div class="metric-row"><span>Gross margin total</span><span>US$1,399</span></div>
+            <div class="metric-row"><span>Commercial cost</span><span>US$3,816</span></div>
+          </div>
+          <div class="segment-block">
+            <h4>UpMarket · GMV US$20k–200k/mo · Avg GMV US$41,282/mo</h4>
+            <p class="payback"><strong>2.1 mo</strong> payback (total) · PoS-only <strong>8.7 mo</strong></p>
+            <div class="metric-row"><span>Deals / month</span><span>7</span></div>
+            <div class="metric-row"><span>Revenue total</span><span>US$15,099</span></div>
+            <div class="metric-row"><span>Gross margin total</span><span>US$2,792</span></div>
+            <div class="metric-row"><span>Commercial cost</span><span>US$5,724</span></div>
+          </div>
+        </div>
+      </div>
+      <p class="source-foot"><strong>Source:</strong> PoS GTM Sales Investment model export · Commercial cost: <strong>25% commission</strong> on monthly revenue total · Adoption offline pay <strong>50%</strong>. <a href="https://gopedroso.github.io/PoS/GTM-Sales-investment/">Open reference deck</a>.</p>
+    </div>
+  </section>
+
+  <!-- 2 Gantt -->
+  <section class="slide" id="slide-2" tabindex="-1">
+    <div class="slide-inner">
+      <p class="kicker">How we’re doing it</p>
+      <h1>2026 roadmap — GTM &amp; launch</h1>
+      <p class="subtitle">Macro activities by country (Brazil · Argentina). Timeline Mar–Dec 2026.</p>
+      <div class="gantt-wrap">
+        <div class="gantt">
+          <div class="gantt-months">
+            <span>Mar</span><span>Apr</span><span>May</span><span>Jun</span><span>Jul</span><span>Aug</span><span>Sep</span><span>Oct</span><span>Nov</span><span>Dec</span>
+          </div>
+          <!-- rows: label + track; bars use % from Mar1–Dec31 2026 -->
+          <div class="gantt-row-label">GTM · BR · Pricing strategy definition</div>
+          <div class="gantt-track"><div class="gantt-bar gtm-br" style="left:7.5%;width:5.6%"></div></div>
+          <div class="gantt-row-label">GTM · BR · New prices testing (no payments)</div>
+          <div class="gantt-track"><div class="gantt-bar gtm-br" style="left:20%;width:19.7%"></div></div>
+          <div class="gantt-row-label">GTM · BR · Product marketing interviews &amp; discovery</div>
+          <div class="gantt-track"><div class="gantt-bar gtm-br" style="left:7.5%;width:18.7%"></div></div>
+          <div class="gantt-row-label">GTM · BR · GTM launch planning</div>
+          <div class="gantt-track"><div class="gantt-bar gtm-br" style="left:26.2%;width:20%"></div></div>
+          <div class="gantt-row-label">GTM · BR · PIX campaign</div>
+          <div class="gantt-track"><div class="gantt-bar gtm-br" style="left:36.4%;width:13.1%"></div></div>
+          <div class="gantt-row-label">GTM · BR · Sales enablement (Payments + PdV)</div>
+          <div class="gantt-track"><div class="gantt-bar gtm-br" style="left:49.5%;width:10.2%"></div></div>
+          <div class="gantt-row-label">GTM · AR · Pricing strategy (QR)</div>
+          <div class="gantt-track"><div class="gantt-bar gtm-ar" style="left:14.8%;width:1.6%"></div></div>
+          <div class="gantt-row-label">GTM · AR · Product marketing &amp; launch strategy (QR)</div>
+          <div class="gantt-track"><div class="gantt-bar gtm-ar" style="left:26.2%;width:10.2%"></div></div>
+          <div class="gantt-row-label">Launch · BR · Pilot launch</div>
+          <div class="gantt-track"><div class="gantt-bar launch-br" style="left:64.9%;width:9.8%"></div></div>
+          <div class="gantt-row-label">Launch · BR · Post-launch review</div>
+          <div class="gantt-track"><div class="gantt-bar launch-br" style="left:74.8%;width:18.7%"></div></div>
+          <div class="gantt-row-label">Launch · AR · Pilot launch (QR)</div>
+          <div class="gantt-track"><div class="gantt-bar launch-ar" style="left:30.2%;width:9.8%"></div></div>
+          <div class="gantt-row-label">Launch · AR · Post-launch review (QR)</div>
+          <div class="gantt-track"><div class="gantt-bar launch-ar" style="left:34.8%;width:20%"></div></div>
+        </div>
+        <div class="legend-gantt">
+          <span><span class="dot" style="background:var(--br)"></span> GTM Brazil</span>
+          <span><span class="dot" style="background:var(--ar)"></span> GTM Argentina</span>
+          <span><span class="dot" style="background:#15803d"></span> Launch Brazil</span>
+          <span><span class="dot" style="background:#2563eb"></span> Launch Argentina</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 Principles -->
+  <section class="slide" id="slide-3" tabindex="-1">
+    <div class="slide-inner">
+      <p class="kicker">Pricing framework</p>
+      <h1>Core principles</h1>
+      <p class="subtitle">Headlines from <strong>PRICING-PRINCIPLES-AND-SCENARIOS</strong> — details stay in the working doc.</p>
+      <div class="principles-grid">
+        <div class="principle-card"><span class="n">1</span> Maximize offline channel results</div>
+        <div class="principle-card"><span class="n">2</span> Radical simplicity for merchants</div>
+        <div class="principle-card"><span class="n">3</span> Align price communication to ICP reality</div>
+        <div class="principle-card"><span class="n">4</span> Ground list prices in non-promotional market bands</div>
+        <div class="principle-card"><span class="n">5</span> Respect settlement horizon sensitivity</div>
+        <div class="principle-card"><span class="n">6</span> Monitor repricing and conversion jointly</div>
+        <div class="principle-card"><span class="n">7</span> Bundle economics with PoS</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 Discussion -->
+  <section class="slide" id="slide-4" tabindex="-1">
+    <div class="slide-inner">
+      <p class="kicker">Pricing framework · Steering discussion</p>
+      <h1>Simplicity of the model vs better economic output</h1>
+      <p class="subtitle">Two buckets for committee debate — bullets are starters, not decisions.</p>
+      <div class="framework-split">
+        <div class="bucket">
+          <h3>Simplicity of the model</h3>
+          <ul>
+            <li><strong>One bill, one story</strong> — PDV, invoicing, and Nuvem Pago legible on a single narrative (avoid “surprise” lines).</li>
+            <li><strong>Fewer dimensions</strong> — minimize the number of fee levers a store manager must track month to month.</li>
+            <li><strong>CPT vs subscription</strong> — where to absorb complexity internally so the merchant sees a clean stack price.</li>
+            <li><strong>Segment framing</strong> — hybrid vs standalone physical (per PMM) without multiplying SKUs.</li>
+            <li><strong>Sales &amp; support test</strong> — language that reps can quote in one breath; FAQs that match the statement.</li>
+            <li><strong>Migration fairness</strong> — grandfathering and credits explained in one short policy, not case-by-case noise.</li>
+          </ul>
+        </div>
+        <div class="bucket">
+          <h3>Better economic output</h3>
+          <ul>
+            <li><strong>North star</strong> — optimize <strong>offline GMV</strong> and <strong>offline revenue</strong> through PDV-led in-store commerce (not ecommerce take rate).</li>
+            <li><strong>Full-stack bundle</strong> — PoS SaaS + payments spread; avoid tuning either line in isolation.</li>
+            <li><strong>NOTR / margin guardrails</strong> — consistency with 2026 BC and acquirer economics (Stone, dLocal, etc.).</li>
+            <li><strong>Settlement &amp; anticipation</strong> — effective MDR surfaced in CRM and quoting so credit economics are not opaque.</li>
+            <li><strong>List anchors</strong> — non-promotional market bands; Upmarket vs SMB baselines for scenario planning.</li>
+            <li><strong>Repricing loop</strong> — after material price moves, joint review of conversion and support signals by segment.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    (function () {
+      var links = document.querySelectorAll(".deck-nav a[data-nav]");
+      var slides = document.querySelectorAll(".slide[id]");
+      function setCurrent() {
+        var id = "slide-0";
+        slides.forEach(function (s) {
+          var r = s.getBoundingClientRect();
+          if (r.top <= 120 && r.bottom > 140) id = s.id;
+        });
+        links.forEach(function (a) {
+          a.setAttribute("aria-current", a.getAttribute("href") === "#" + id ? "true" : "false");
+        });
+      }
+      window.addEventListener("scroll", setCurrent, { passive: true });
+      setCurrent();
+    })();
+  </script>
+</body>
+</html>
