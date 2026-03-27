@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PDV · Pricing principles &amp; monetization scenarios</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #000b19;
+      --text: #e8ecf0;
+      --muted: #9ca3af;
+      --accent: #3d7fe0;
+      --br: #22c55e;
+      --mx: #ef4444;
+      --ar: #3b82f6;
+      --panel: rgba(255,255,255,0.05);
+      --border: rgba(255,255,255,0.1);
+      --maxw: 820px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.55;
+      font-size: 0.95rem;
+    }
+    .hero {
+      padding: 2.5rem 1.25rem 2rem;
+      background: radial-gradient(ellipse 100% 80% at 50% -20%, rgba(0, 89, 213, 0.25), transparent 55%);
+      border-bottom: 1px solid var(--border);
+    }
+    .hero-inner { max-width: var(--maxw); margin: 0 auto; }
+    .kicker {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin: 0 0 0.5rem;
+    }
+    h1 {
+      font-size: clamp(1.35rem, 3.5vw, 1.85rem);
+      font-weight: 800;
+      line-height: 1.2;
+      margin: 0 0 0.75rem;
+      color: #fff;
+    }
+    .lede { color: var(--muted); font-size: 1.02rem; max-width: 62ch; margin: 0; }
+    main { max-width: var(--maxw); margin: 0 auto; padding: 2rem 1.25rem 3rem; }
+    h2 {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #fff;
+      margin: 2.25rem 0 0.75rem;
+      padding-bottom: 0.35rem;
+      border-bottom: 1px solid var(--border);
+    }
+    h3 { font-size: 0.88rem; font-weight: 700; color: var(--accent); margin: 1.25rem 0 0.5rem; }
+    p { margin: 0 0 0.9rem; }
+    ul { margin: 0 0 1rem; padding-left: 1.2rem; }
+    li { margin-bottom: 0.45rem; }
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1rem 1.15rem;
+      margin: 1rem 0;
+    }
+    .principles ol { counter-reset: p; list-style: none; padding: 0; margin: 0; }
+    .principles li {
+      position: relative;
+      padding-left: 2rem;
+      margin-bottom: 1rem;
+      counter-increment: p;
+    }
+    .principles li::before {
+      content: counter(p);
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 1.5rem;
+      height: 1.5rem;
+      background: rgba(0, 89, 213, 0.35);
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+    }
+    .tag {
+      display: inline-block;
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 0.2rem 0.45rem;
+      border-radius: 4px;
+      margin-right: 0.35rem;
+    }
+    .tag-br { background: rgba(34, 197, 94, 0.25); color: #86efac; }
+    .tag-ar { background: rgba(59, 130, 246, 0.25); color: #93c5fd; }
+    .tag-mx { background: rgba(239, 68, 68, 0.2); color: #fca5a5; }
+    .charts-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      margin: 1.25rem 0;
+    }
+    @media (min-width: 720px) {
+      .charts-grid { grid-template-columns: 1fr 1fr; }
+    }
+    .chart-card {
+      background: #fff;
+      color: #1f2328;
+      border-radius: 12px;
+      padding: 1rem 1rem 0.85rem;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.35);
+    }
+    .chart-card h4 {
+      margin: 0 0 0.35rem;
+      font-size: 0.8rem;
+      font-weight: 800;
+      color: #111827;
+    }
+    .chart-card .sub {
+      font-size: 0.72rem;
+      color: #6b7280;
+      margin: 0 0 0.75rem;
+      line-height: 1.4;
+    }
+    .chart-card svg { width: 100%; height: auto; display: block; }
+    .footnote {
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-top: 0.75rem;
+      line-height: 1.45;
+    }
+    a { color: var(--accent); }
+    footer {
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 1.5rem 1.25rem 2.5rem;
+      font-size: 0.75rem;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+    }
+    code { font-size: 0.85em; background: rgba(255,255,255,0.06); padding: 0.1rem 0.35rem; border-radius: 4px; }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-inner">
+      <p class="kicker">Working draft · PDV payments &amp; pricing</p>
+      <h1>Pricing principles, business context &amp; monetization scenarios</h1>
+      <p class="lede">
+        This note aligns PDV pricing with the <strong>offline channel</strong> strategy, the 2026 product vision,
+        and the PMM diagnosis. It is written for executives: principles first, evidence second, scenarios last.
+        Quantitative scenarios mirror the <a href="https://henryjbpetry.github.io/pos_payments/pricing-deck/">pricing deck</a>
+        and the 2026 business case workbook.
+      </p>
+    </div>
+  </header>
+
+  <main>
+    <h2>Executive summary</h2>
+    <div class="card">
+      <ul style="margin:0;">
+        <li><strong>Channel focus:</strong> Payments pricing and monetization decisions are optimized for <strong>offline GMV and offline revenue</strong> through PDV — not for growing online checkout or ecommerce take rate.</li>
+        <li><strong>Merchant experience:</strong> Fee structures and communication must stay <strong>simple and legible</strong> at the counter; complexity is a conversion and support tax.</li>
+        <li><strong>Economic story:</strong> The same “full stack” logic as the <a href="https://gopedroso.github.io/PoS/GTM-Sales-investment/">PoS GTM Sales Investment</a> narrative applies: <strong>PoS + offline payments</strong> is the bundle that justifies commercial investment; payments are the monetization engine on physical GMV.</li>
+        <li><strong>Scenarios (illustrative):</strong> Under fixed BC costs, moving list prices toward competitive <strong>credit à vista</strong> bands materially moves estimated NOTR; anticipation has limited room when market data is sparse.</li>
+      </ul>
+    </div>
+
+    <h2>1. Business context</h2>
+    <h3>1.1 PDV Vision 2026 (multi-store operators)</h3>
+    <p>
+      The PDV business has demonstrated <strong>strong product–market fit</strong> (Sean Ellis scores in the high 70s–80% vs a 40% benchmark), with offline GMV reaching record levels and revenue run-rate scaling with GMV.
+      The strategic shift for 2026 is toward <strong>Multi-Store Operators (MSOs)</strong>: merchants with multiple locations, staff, and higher offline GMV — a segment that already represents a large share of POS merchants and offline GMV in the broader market model.
+    </p>
+    <p>
+      <span class="tag tag-br">BR</span><span class="tag tag-ar">AR</span><span class="tag tag-mx">MX</span>
+      Geography matters: Brazil has overtaken Argentina in recent share in the vision narrative; Mexico and smaller markets show high offline intensity among adopters. Payments and pricing must work across these realities (regulation, acquirers, and merchant expectations differ).
+    </p>
+
+    <h3>1.2 PMM diagnosis (what matters for pricing)</h3>
+    <p>
+      The PMM diagnostic emphasizes <strong>honest perimeter</strong>: communicate and price for what the product delivers today, not only the roadmap.
+      Offline payments — scope, modalities, and narrative — remain partly being mapped; “maquininha” and modality mix must be unpacked before hard commitments.
+      Key PMM themes that intersect pricing:
+    </p>
+    <ul>
+      <li><strong>ICP clarity:</strong> A large share of trials show weak physical signal; pricing and lifecycle noise follow when the funnel is diluted.</li>
+      <li><strong>Lifecycle:</strong> Growth has been largely organic; structured journeys will amplify whatever price model we choose.</li>
+      <li><strong>Pricing risk:</strong> March 2026 repricing can pressure conversion — requires disciplined monitoring by segment.</li>
+      <li><strong>Merchant preference:</strong> Evidence suggests <strong>heterogeneous</strong> appetite (subscription vs per-transaction / CPT-style framing); one-size communication may not fit all ICPs.</li>
+    </ul>
+
+    <h3>1.3 Payments inside the broader story (GTM reference)</h3>
+    <p>
+      The <a href="https://gopedroso.github.io/PoS/GTM-Sales-investment/">PoS GTM Sales Investment</a> deck frames LatAm opportunity size, segment mix, and <strong>unit economics when PoS and offline payments move together</strong>.
+      The executive takeaway for PDV is parallel: <strong>payments monetization on offline GMV</strong> is how we capture value from in-store commerce; PoS SaaS alone does not carry the full commercial thesis.
+      Brazil Stone and Argentina dLocal are used there as <strong>illustrative</strong> acquirer economics — our PDV pricing work should remain consistent with that “bundle discipline” story even as our actual fee stack differs.
+    </p>
+
+    <h2>2. How we see payments in the PDV model</h2>
+    <ul>
+      <li><strong>Offline-first revenue:</strong> PDV exists to win physical commerce; payment fees should be evaluated against <strong>offline GMV and offline revenue</strong>, not ecommerce metrics.</li>
+      <li><strong>Integrated experience:</strong> Merchants already associate PDV with “one place for online + physical”; payments should reinforce that integration without hiding material costs.</li>
+      <li><strong>Transparency beats cleverness:</strong> Complex multi-page fee grids erode trust; the PMM doc’s emphasis on <strong>clear narrative</strong> applies directly to statements, receipts, and sales conversations.</li>
+      <li><strong>Regulatory and partner reality:</strong> MDRs, anticipation, and settlement horizons are set in partnership with acquirers and networks — our principles guide <strong>what we optimize and how we explain it</strong>, within those constraints.</li>
+    </ul>
+
+    <h2>3. Pricing principles</h2>
+    <div class="card principles">
+      <ol>
+        <li>
+          <strong>Maximize offline channel results.</strong> Success metrics for this work are <strong>offline GMV</strong> and <strong>offline revenue</strong> attributable to PDV-led in-store commerce — not online business outcomes. Trade-offs that help ecommerce at the expense of clarity or uptake in-store are out of scope.
+        </li>
+        <li>
+          <strong>Radical simplicity for merchants.</strong> Prefer fewer variables, predictable statements, and language that a store manager can explain in one sentence. Avoid opaque bundles that shift risk to the merchant without upside.
+        </li>
+        <li>
+          <strong>Align price communication to ICP reality.</strong> Hybrid vs standalone physical merchants (per PMM hypotheses) may need different <strong>framing</strong> even if list rates are shared — “simple” does not mean “generic.”
+        </li>
+        <li>
+          <strong>Ground list prices in non-promotional market bands.</strong> Public promos distort comparability; our benchmarks emphasize sustainable table stakes from non-promo competitor rows, with explicit confidence limits where data is thin.
+        </li>
+        <li>
+          <strong>Respect settlement horizon sensitivity.</strong> Prazo / liquidation policy shifts effective MDR for credit; pricing and CRM must surface that relationship so merchants are not surprised by channel economics.
+        </li>
+        <li>
+          <strong>Monitor repricing and conversion jointly.</strong> After material price changes, review conversion and support signals by segment (per PMM risk register) — pricing is a product surface, not only a finance lever.
+        </li>
+        <li>
+          <strong>Bundle economics with PoS.</strong> Strategically, monetize payments in a way that reinforces the <strong>full-stack</strong> story (PoS + payments) rather than optimizing either line in isolation.
+        </li>
+      </ol>
+    </div>
+
+    <h2>4. Monetization scenarios (ultra-executive view)</h2>
+    <p>
+      The full scenario table lives in the Excel export from the pricing model. For decision-making, two views matter most:
+      (A) <strong>where Brazil Stone sits vs other countries</strong> on NOTR in the 2026 BC, and
+      (B) how <strong>estimated NOTR</strong> moves when we stress-test <strong>processing fees</strong> against non-promo <strong>credit à vista</strong> market bands — holding BC cost assumptions fixed (illustrative, constant-GMV linearization in the workbook).
+    </p>
+
+    <div class="charts-grid">
+      <div class="chart-card">
+        <h4>Chart A — NOTR % by provider (2026 BC, “Only CC”)</h4>
+        <p class="sub">Shows strategic dispersion: BR Stone vs regional peers in the same business-case export. Not a target to copy — a <strong>benchmark map</strong>.</p>
+        <!-- NOTR % from BC: Getnet 0.784%, Stone 0.769%, Stripe 1.96%, dLocal 0.60% · axis 0–2% -->
+        <svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg" aria-label="NOTR by provider">
+          <text x="8" y="18" font-size="11" font-family="system-ui,sans-serif" fill="#374151">0%</text>
+          <text x="8" y="98" font-size="11" font-family="system-ui,sans-serif" fill="#374151">1%</text>
+          <text x="8" y="178" font-size="11" font-family="system-ui,sans-serif" fill="#374151">2%</text>
+          <line x1="36" y1="24" x2="36" y2="184" stroke="#e5e7eb" stroke-width="1"/>
+          <line x1="36" y1="104" x2="300" y2="104" stroke="#f3f4f6" stroke-width="1"/>
+          <rect x="44" y="121.3" width="40" height="62.7" fill="#3b82f6" rx="4"/>
+          <text x="64" y="115" font-size="10" text-anchor="middle" font-family="system-ui,sans-serif" fill="#1f2937">0.78%</text>
+          <text x="64" y="192" font-size="9" text-anchor="middle" font-family="system-ui,sans-serif" fill="#6b7280">Getnet</text>
+          <rect x="100" y="122.5" width="40" height="61.5" fill="#22c55e" rx="4"/>
+          <text x="120" y="115" font-size="10" text-anchor="middle" font-family="system-ui,sans-serif" fill="#1f2937">0.77%</text>
+          <text x="120" y="192" font-size="9" text-anchor="middle" font-family="system-ui,sans-serif" fill="#6b7280">Stone</text>
+          <rect x="156" y="27.2" width="40" height="156.8" fill="#a855f7" rx="4"/>
+          <text x="176" y="20" font-size="10" text-anchor="middle" font-family="system-ui,sans-serif" fill="#1f2937">1.96%</text>
+          <text x="176" y="192" font-size="9" text-anchor="middle" font-family="system-ui,sans-serif" fill="#6b7280">Stripe</text>
+          <rect x="212" y="136" width="40" height="48" fill="#f97316" rx="4"/>
+          <text x="232" y="129" font-size="10" text-anchor="middle" font-family="system-ui,sans-serif" fill="#1f2937">0.60%</text>
+          <text x="232" y="192" font-size="9" text-anchor="middle" font-family="system-ui,sans-serif" fill="#6b7280">dLocal</text>
+          <text x="178" y="12" font-size="9" font-family="system-ui,sans-serif" fill="#6b7280">NOTR % · 2026 BC</text>
+        </svg>
+      </div>
+
+      <div class="chart-card">
+        <h4>Chart B — NOTR sensitivity (Stone, illustrative fee stress)</h4>
+        <p class="sub">
+          <strong>Strategy read:</strong> baseline reflects current BC fees. Moving <strong>processing</strong> toward competitive <strong>credit à vista</strong> min/avg/max (non-promo sample) swings estimated NOTR materially while costs are held flat — i.e. list price is a primary strategic lever; anticipation tweaks are secondary when data is thin.
+        </p>
+        <!-- decimals: baseline 0.007692, avg proc 0.025023, max proc 0.047468 — max bar ~2.5% height use scale 0-5% for visual -->
+        <svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg" aria-label="Scenario NOTR">
+          <text x="8" y="18" font-size="11" font-family="system-ui,sans-serif" fill="#374151">0%</text>
+          <text x="8" y="104" font-size="11" font-family="system-ui,sans-serif" fill="#374151">2.5%</text>
+          <text x="8" y="184" font-size="11" font-family="system-ui,sans-serif" fill="#374151">5%</text>
+          <line x1="36" y1="24" x2="36" y2="184" stroke="#e5e7eb" stroke-width="1"/>
+          <!-- 160px = 5% -->
+          <!-- h = notr_est/0.05 * 160 -->
+          <!-- baseline 0.007692 -> 24.6px -->
+          <rect x="52" y="159.4" width="56" height="24.6" fill="#22c55e" rx="4"/>
+          <text x="80" y="152" font-size="9" text-anchor="middle" font-family="system-ui,sans-serif" fill="#1f2937">0.77%</text>
+          <text x="80" y="192" font-size="8" text-anchor="middle" font-family="system-ui,sans-serif" fill="#6b7280">BC baseline</text>
+          <rect x="132" y="103.9" width="56" height="80.1" fill="#3b82f6" rx="4"/>
+          <text x="160" y="96" font-size="9" text-anchor="middle" font-family="system-ui,sans-serif" fill="#1f2937">2.50%</text>
+          <text x="160" y="192" font-size="8" text-anchor="middle" font-family="system-ui,sans-serif" fill="#6b7280">At mkt avg credit</text>
+          <rect x="212" y="32.1" width="56" height="151.9" fill="#a855f7" rx="4"/>
+          <text x="240" y="24" font-size="9" text-anchor="middle" font-family="system-ui,sans-serif" fill="#1f2937">4.75%</text>
+          <text x="240" y="192" font-size="8" text-anchor="middle" font-family="system-ui,sans-serif" fill="#6b7280">At mkt max credit</text>
+          <text x="160" y="12" font-size="9" font-family="system-ui,sans-serif" fill="#6b7280">Estimated NOTR · BC costs fixed · illustrative</text>
+        </svg>
+      </div>
+    </div>
+
+    <p class="footnote">
+      <strong>Numbers:</strong> Chart A from <code>PDV Payments Business Case.xlsx</code> · 2026 BC · “NOTR %” row.
+      Chart B from scenario rows <code>BC_baseline_stone</code>, <code>suggested_below_market_avg_proc_only_hold_bc_ant</code>,
+      <code>suggested_below_market_max_proc_only_hold_bc_ant</code> in <code>pricing-analysis-economics.xlsx</code> (generated by <code>build_pricing_analysis.py</code>).
+      GP and adoption effects are <strong>not</strong> modeled in these bars — see workbook for linear GP illustrations and limitations.
+    </p>
+
+    <h2>5. What we still owe (next iterations)</h2>
+    <ul>
+      <li>Segment-level price tests aligned to PMM ICP hypotheses (hybrid vs standalone physical).</li>
+      <li>Richer anticipation benchmarks as non-promo market data improves.</li>
+      <li>Explicit merchant-facing narrative and fee sheets once modality scope (Pix / credit / NFC, etc.) is locked for launch windows.</li>
+    </ul>
+  </main>
+
+  <footer>
+    <p style="margin:0 0 0.75rem;">
+      <strong>Sources:</strong> internal PDFs
+      <em>PDV Vision 2026: Conquering Multi-Store Operators</em> and
+      <em>[PMM MS] PDV · Diagnóstico e Plano de ação</em> (under <code>pos-pricing-model/</code>);
+      external reference deck
+      <a href="https://gopedroso.github.io/PoS/GTM-Sales-investment/">PoS GTM Sales Investment</a>;
+      pricing model outputs in this folder.
+    </p>
+    <p style="margin:0;">Working draft — refine with your additional points.</p>
+  </footer>
+</body>
+</html>
