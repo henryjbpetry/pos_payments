@@ -106,6 +106,11 @@
       margin: 0 0 1rem;
       max-width: 70ch;
     }
+    /* Principles: denser insight line — bump vs generic subtitle for readability */
+    #slide-3 .subtitle {
+      font-size: clamp(0.95rem, 1.35vw, 1.08rem);
+      line-height: 1.45;
+    }
     .country-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -311,34 +316,242 @@
     .legend-gantt span { display: flex; align-items: center; gap: 0.35rem; }
     .dot { width: 10px; height: 10px; border-radius: 2px; }
 
-    .principles-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 0.65rem;
+    /* Cover — light “corporate tech” theme (pale blue + navy), split layout */
+    .slide-cover {
+      --cover-bg: #e8f2fc;
+      --cover-navy: #0f1f3d;
+      --cover-navy-2: #1e3a5f;
+      --cover-slate: #475569;
+      --cover-blue: #1e40af;
+      --cover-blue-soft: #93c5fd;
+      align-items: stretch;
+      justify-content: center;
+      min-height: calc(100vh - var(--nav-h));
+      background: var(--cover-bg);
+      color: var(--cover-navy);
     }
-    .principle-card {
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 0.65rem 0.85rem;
-      font-size: 0.82rem;
+    .slide.slide-cover::before {
+      background:
+        radial-gradient(ellipse 90% 70% at 85% 15%, rgba(147, 197, 253, 0.45) 0%, transparent 55%),
+        radial-gradient(ellipse 70% 50% at 10% 90%, rgba(186, 230, 253, 0.5) 0%, transparent 50%),
+        linear-gradient(165deg, #f0f7ff 0%, #e0edf8 45%, #dbeafe 100%);
+    }
+    .slide-cover .slide-inner {
+      max-width: 1180px;
+      width: 100%;
+    }
+    .cover-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(260px, 0.95fr);
+      gap: clamp(1rem, 3vw, 2.5rem);
+      align-items: center;
+      min-height: min(78vh, 640px);
+    }
+    @media (max-width: 900px) {
+      .cover-layout { grid-template-columns: 1fr; min-height: unset; }
+      .cover-art { order: -1; max-height: 240px; }
+    }
+    .cover-text {
+      position: relative;
+      z-index: 2;
+      padding: 0.25rem 0.15rem 0.5rem;
+    }
+    .cover-brand {
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--cover-blue);
+      margin: 0 0 0.85rem;
+    }
+    .cover-title {
+      font-size: clamp(1.75rem, 4vw, 2.65rem);
+      font-weight: 800;
+      color: var(--cover-navy);
+      line-height: 1.1;
+      margin: 0 0 0.65rem;
+    }
+    .cover-sub {
+      font-size: clamp(1.05rem, 1.75vw, 1.25rem);
+      font-weight: 700;
+      color: var(--cover-navy-2);
+      margin: 0 0 1rem;
+      line-height: 1.35;
+    }
+    .cover-objective {
+      font-size: clamp(0.95rem, 1.55vw, 1.08rem);
+      font-weight: 600;
+      color: var(--cover-navy);
+      margin: 0 0 1.35rem;
+      line-height: 1.5;
+      max-width: 52ch;
+    }
+    .cover-date {
+      font-size: 0.95rem;
+      color: var(--cover-slate);
+      margin: 0 0 1.5rem;
+    }
+    .cover-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem 1rem;
+      align-items: center;
+    }
+    .cover-links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.9rem;
       font-weight: 700;
       color: #fff;
-      display: flex;
-      gap: 0.6rem;
-      align-items: flex-start;
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      border-radius: 999px;
+      border: 1px solid rgba(30, 64, 175, 0.35);
+      background: linear-gradient(135deg, #1e40af, #2563eb);
+      box-shadow: 0 4px 14px rgba(30, 64, 175, 0.25);
+      transition: transform 0.12s, box-shadow 0.12s;
     }
-    .principle-card .n {
-      flex-shrink: 0;
-      width: 1.5rem;
-      height: 1.5rem;
-      border-radius: 6px;
-      background: rgba(0, 89, 213, 0.35);
+    .cover-links a:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 18px rgba(30, 64, 175, 0.32);
+    }
+    .cover-links a.secondary {
+      background: #fff;
+      color: var(--cover-blue);
+      border-color: rgba(30, 64, 175, 0.45);
+      box-shadow: 0 2px 8px rgba(15, 31, 61, 0.06);
+    }
+    .cover-links a.secondary:hover {
+      background: #f8fafc;
+    }
+    .cover-art {
+      position: relative;
+      z-index: 1;
+      min-height: 280px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.72rem;
+    }
+    .cover-art svg {
+      width: 100%;
+      max-width: 420px;
+      height: auto;
+      filter: drop-shadow(0 12px 28px rgba(15, 31, 61, 0.12));
+    }
+    .cover-blobs {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 0;
+    }
+    .cover-blobs span {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.55;
+    }
+    .cover-blobs .b1 {
+      width: min(42vw, 340px);
+      height: min(42vw, 340px);
+      background: radial-gradient(circle at 30% 30%, #bfdbfe, #93c5fd);
+      top: -8%;
+      right: -6%;
+    }
+    .cover-blobs .b2 {
+      width: min(28vw, 220px);
+      height: min(28vw, 220px);
+      background: radial-gradient(circle, #dbeafe, #bfdbfe);
+      bottom: 5%;
+      right: 18%;
+      opacity: 0.4;
+    }
+    .cover-blobs .b3 {
+      width: min(22vw, 180px);
+      height: min(22vw, 180px);
+      background: radial-gradient(circle, #e0f2fe, #bae6fd);
+      top: 38%;
+      left: -4%;
+      opacity: 0.35;
+    }
+
+    /* Principles — card grid + number + icon */
+    .principles-grid-pro {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.85rem;
+    }
+    @media (min-width: 1000px) {
+      .principles-grid-pro {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      .principle-card-pro:nth-child(7) {
+        grid-column: 2;
+      }
+    }
+    @media (max-width: 640px) {
+      .principles-grid-pro { grid-template-columns: 1fr; }
+      .principle-card-pro:nth-child(7) { grid-column: auto; }
+    }
+    .principle-card-pro {
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.07) 0%, rgba(255, 255, 255, 0.03) 100%);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1rem 1rem 1.05rem;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+    }
+    .principle-card-head {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.65rem;
+      margin-bottom: 0.55rem;
+    }
+    .principle-num {
+      flex-shrink: 0;
+      width: 2.35rem;
+      height: 2.35rem;
+      border-radius: 12px;
+      background: linear-gradient(135deg, rgba(0, 89, 213, 0.55), rgba(61, 127, 224, 0.35));
+      border: 1px solid rgba(61, 127, 224, 0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.05rem;
       font-weight: 800;
+      color: #fff;
+      line-height: 1;
+    }
+    .principle-icon {
+      flex-shrink: 0;
+      width: 2.35rem;
+      height: 2.35rem;
+      border-radius: 12px;
+      background: rgba(0, 0, 0, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.35rem;
+      line-height: 1;
+    }
+    .principle-card-titles {
+      flex: 1;
+      min-width: 0;
+    }
+    .principle-card-titles strong {
+      display: block;
+      font-size: 1rem;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.3;
+    }
+    .principle-why-pro {
+      margin: 0;
+      font-size: 0.92rem;
+      font-weight: 500;
+      color: var(--muted);
+      line-height: 1.45;
+      padding-left: 0.1rem;
     }
 
     .framework-split {
@@ -365,10 +578,56 @@
     }
     .bucket ul { margin: 0; padding-left: 1.1rem; font-size: 0.86rem; color: var(--text); }
     .bucket li { margin-bottom: 0.45rem; }
+    .balance-columns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      align-items: start;
+    }
+    @media (max-width: 900px) {
+      .balance-columns { grid-template-columns: 1fr; }
+    }
+    .balance-pillar {
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+    }
+    .balance-pillar h3 {
+      margin: 0 0 0.25rem;
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: var(--accent);
+    }
+    .tri-box {
+      background: rgba(0, 0, 0, 0.2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 0.65rem 0.8rem;
+    }
+    .tri-box h4 {
+      margin: 0 0 0.4rem;
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+    }
+    .tri-box p, .tri-box ul {
+      margin: 0;
+      font-size: 0.8rem;
+      color: var(--text);
+      line-height: 1.45;
+    }
+    .tri-box ul { padding-left: 1rem; }
+    .tri-box li { margin-bottom: 0.3rem; }
+    .gantt-bar.stone { background: linear-gradient(90deg, #d97706, #f59e0b); }
+    .gantt-bar.dev-br { background: linear-gradient(90deg, #7c3aed, #a78bfa); }
+    .gantt-bar.dev-ar { background: linear-gradient(90deg, #5b21b6, #8b5cf6); }
   </style>
 </head>
 <body>
   <nav class="deck-nav" aria-label="Slides">
+    <a href="#slide-cover" data-nav>Cover</a><span class="sep">|</span>
     <a href="#slide-0" data-nav>0 · Where we are</a><span class="sep">|</span>
     <a href="#slide-1" data-nav>1 · Business case</a><span class="sep">|</span>
     <a href="#slide-2" data-nav>2 · Roadmap</a><span class="sep">|</span>
@@ -376,51 +635,100 @@
     <a href="#slide-4" data-nav>4 · Discussion</a>
   </nav>
 
+  <!-- Cover -->
+  <section class="slide slide-cover" id="slide-cover" tabindex="-1">
+    <div class="cover-blobs" aria-hidden="true"><span class="b1"></span><span class="b2"></span><span class="b3"></span></div>
+    <div class="slide-inner">
+      <div class="cover-layout">
+        <div class="cover-text">
+          <p class="cover-brand">POS + Payments · Pricing strategy</p>
+          <h1 class="cover-title">Steering committee deck</h1>
+          <p class="cover-sub">First readout — offline payments, PDV, and commercial roadmap</p>
+          <p class="cover-objective">
+            <strong>Objectives:</strong> align expectations on next steps and long-term view; discuss pricing principles
+          </p>
+          <p class="cover-date">March 2026</p>
+          <div class="cover-links">
+            <a href="https://henryjbpetry.github.io/pos_payments/pos-pricing-model/steering-committee-deck.html" rel="noopener noreferrer">Open live deck (GitHub Pages)</a>
+            <a class="secondary" href="https://github.com/henryjbpetry/pos_payments/blob/main/pos-pricing-model/steering-committee-deck.html" rel="noopener noreferrer">View source on GitHub</a>
+          </div>
+        </div>
+        <div class="cover-art" aria-hidden="true">
+          <svg class="cover-illustration" viewBox="0 0 400 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="">
+            <!-- Stylized world map (simplified silhouettes) -->
+            <path fill="#0f1f3d" d="M 52 118 L 78 95 L 118 88 L 152 102 L 168 128 L 162 168 L 138 198 L 98 205 L 62 188 L 48 152 Z" opacity="0.92"/>
+            <path fill="#0f1f3d" d="M 175 108 L 218 98 L 255 108 L 278 138 L 272 178 L 242 198 L 198 192 L 172 168 L 168 132 Z" opacity="0.88"/>
+            <path fill="#0f1f3d" d="M 288 125 L 332 118 L 358 145 L 352 182 L 318 198 L 285 185 L 275 152 Z" opacity="0.9"/>
+            <ellipse cx="195" cy="248" rx="28" ry="18" fill="#0f1f3d" opacity="0.85"/>
+            <!-- Network arcs -->
+            <path stroke="#60a5fa" stroke-width="1.6" fill="none" opacity="0.75" d="M 95 155 Q 160 120 230 145 T 330 130"/>
+            <path stroke="#60a5fa" stroke-width="1.6" fill="none" opacity="0.75" d="M 120 175 Q 200 200 285 165"/>
+            <path stroke="#1e40af" stroke-width="1.2" fill="none" opacity="0.45" d="M 75 175 L 130 195 L 210 175 L 298 195"/>
+            <!-- Nodes -->
+            <circle cx="88" cy="158" r="5" fill="#1e40af"/>
+            <circle cx="155" cy="138" r="5" fill="#1e40af"/>
+            <circle cx="228" cy="152" r="5" fill="#1e40af"/>
+            <circle cx="305" cy="168" r="5" fill="#1e40af"/>
+            <circle cx="268" cy="132" r="4" fill="#2563eb"/>
+            <circle cx="320" cy="145" r="4" fill="#2563eb"/>
+            <!-- POS + card -->
+            <g transform="translate(168, 28)">
+              <rect x="0" y="0" width="52" height="38" rx="6" fill="#0f1f3d"/>
+              <rect x="6" y="8" width="28" height="18" rx="2" fill="#e8f2fc" opacity="0.95"/>
+              <rect x="6" y="8" width="28" height="5" rx="1" fill="#1e40af"/>
+              <rect x="38" y="8" width="10" height="22" rx="2" fill="#e8f2fc" opacity="0.9"/>
+              <path d="M 62 12 L 78 8 L 78 32 L 62 28 Z" fill="none" stroke="#1e40af" stroke-width="2" stroke-linecap="round"/>
+              <path d="M 62 20 L 72 16" stroke="#60a5fa" stroke-width="1.6" fill="none"/>
+            </g>
+            <text x="200" y="292" text-anchor="middle" fill="#64748b" font-size="11" font-family="sans-serif">Offline GMV · multi-country</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- 0 -->
   <section class="slide" id="slide-0" tabindex="-1">
     <div class="slide-inner">
       <p class="kicker">POS · Pricing strategy · Steering committee</p>
       <h1>Where we are</h1>
-      <p class="subtitle">Country posture and updates — executive snapshot. Fill placeholders before the session.</p>
+      <p class="subtitle">Country posture and latest steering updates — what changed since last readout.</p>
       <div class="country-grid">
         <article class="country-card">
           <div class="country-head">
             <span class="flag" aria-hidden="true">🇧🇷</span>
             <h2 class="country-name br">Brazil</h2>
           </div>
-          <p class="country-sub">Offline payments · <strong>Stone</strong> · largest store count; anchor for testing and scale.</p>
+          <p class="country-sub"><strong>~99% toward Stone</strong> for tech simplicity and logistics — pricing is the next major deliverable.</p>
           <ul class="exec-bullets">
-            <li>Strategic posture: <em>(add update)</em></li>
-            <li>Pricing / GTM: <em>(add update)</em></li>
-            <li>Risks / dependencies: <em>(add update)</em></li>
+            <li><strong>Development:</strong> Moving ahead, prioritizing work that overlaps with <strong>multi-acquirer</strong> foundations.</li>
+            <li><strong>Partner:</strong> ~99% decided on <strong>Stone</strong> — simpler integration and better logistics handling vs alternatives.</li>
+            <li><strong>Next:</strong> <strong>Pricing</strong> is the next big milestone after partner direction.</li>
+            <li><strong>Dependencies:</strong> Stone commercial/tech negotiations and joint roadmap planning.</li>
           </ul>
-          <ul class="placeholder-block" aria-label="Space for additional notes"><li></li><li></li></ul>
         </article>
         <article class="country-card">
           <div class="country-head">
             <span class="flag" aria-hidden="true">🇦🇷</span>
             <h2 class="country-name ar">Argentina</h2>
           </div>
-          <p class="country-sub">Offline payments · <strong>dLocal</strong> · QR-led motion; higher dollars per store in model.</p>
+          <p class="country-sub"><strong>PSP-first:</strong> Pagonube focused on PSP build — <strong>QR interoperable</strong> may be the only PDV-owned path.</p>
           <ul class="exec-bullets">
-            <li>Strategic posture: <em>(add update)</em></li>
-            <li>Pricing / GTM: <em>(add update)</em></li>
-            <li>Risks / dependencies: <em>(add update)</em></li>
+            <li><strong>Focus:</strong> Pagonube team <strong>fully on PSP development</strong>.</li>
+            <li><strong>Implication:</strong> If PDV product can ship it, <strong>QR interoperable</strong> is the viable option — <strong>under analysis</strong>.</li>
+            <li><strong>Later:</strong> After PSP nears launch, reassess <strong>acquirer terminals</strong> with the acquirer.</li>
           </ul>
-          <ul class="placeholder-block" aria-label="Space for additional notes"><li></li><li></li></ul>
         </article>
         <article class="country-card">
           <div class="country-head">
             <span class="flag" aria-hidden="true">🇲🇽</span>
             <h2 class="country-name mx">Mexico</h2>
           </div>
-          <p class="country-sub">Later phase unless strategy shifts — lock <strong>local payment economics</strong> and <strong>FX</strong> before committing.</p>
+          <p class="country-sub"><strong>Capacity-gated:</strong> progress hinges on <strong>two developers</strong> joining Pagonube — Stripe stays in play.</p>
           <ul class="exec-bullets">
-            <li>Strategic posture: <em>(add update)</em></li>
-            <li>Pricing / GTM: <em>(add update)</em></li>
-            <li>Risks / dependencies: <em>(add update)</em></li>
+            <li><strong>Hard dependency:</strong> Entirely contingent on <strong>two new developers</strong> being allocated to the Pagonube team.</li>
+            <li><strong>Partner:</strong> <strong>Stripe</strong> remains engaged while the resourcing decision is open.</li>
           </ul>
-          <ul class="placeholder-block" aria-label="Space for additional notes"><li></li><li></li></ul>
         </article>
       </div>
     </div>
@@ -509,44 +817,53 @@
     <div class="slide-inner">
       <p class="kicker">How we’re doing it</p>
       <h1>2026 roadmap — GTM &amp; launch</h1>
-      <p class="subtitle">Macro activities by country (Brazil · Argentina). Timeline Mar–Dec 2026.</p>
+      <p class="subtitle">Macro program timeline Mar–Dec 2026 — credenciamento, build, GTM, and launches (BR vs AR dates differ).</p>
       <div class="gantt-wrap">
         <div class="gantt">
           <div class="gantt-months">
             <span>Mar</span><span>Apr</span><span>May</span><span>Jun</span><span>Jul</span><span>Aug</span><span>Sep</span><span>Oct</span><span>Nov</span><span>Dec</span>
           </div>
-          <!-- rows: label + track; bars use % from Mar1–Dec31 2026 -->
+          <!-- Bars scaled to 1 Mar–31 Dec 2026 -->
+          <div class="gantt-row-label">Credenciamento Stone</div>
+          <div class="gantt-track"><div class="gantt-bar stone" style="left:8.85%;width:14.75%"></div></div>
+          <div class="gantt-row-label">Development · BR *</div>
+          <div class="gantt-track"><div class="gantt-bar dev-br" style="left:11.8%;width:62.95%"></div></div>
+          <div class="gantt-row-label">Development · AR *</div>
+          <div class="gantt-track"><div class="gantt-bar dev-ar" style="left:11.8%;width:38.36%"></div></div>
           <div class="gantt-row-label">GTM · BR · Pricing strategy definition</div>
-          <div class="gantt-track"><div class="gantt-bar gtm-br" style="left:7.5%;width:5.6%"></div></div>
+          <div class="gantt-track"><div class="gantt-bar gtm-br" style="left:7.54%;width:6.56%"></div></div>
           <div class="gantt-row-label">GTM · BR · New prices testing (no payments)</div>
-          <div class="gantt-track"><div class="gantt-bar gtm-br" style="left:20%;width:19.7%"></div></div>
+          <div class="gantt-track"><div class="gantt-bar gtm-br" style="left:20%;width:19.67%"></div></div>
           <div class="gantt-row-label">GTM · BR · Product marketing interviews &amp; discovery</div>
-          <div class="gantt-track"><div class="gantt-bar gtm-br" style="left:7.5%;width:18.7%"></div></div>
+          <div class="gantt-track"><div class="gantt-bar gtm-br" style="left:7.54%;width:12.46%"></div></div>
           <div class="gantt-row-label">GTM · BR · GTM launch planning</div>
-          <div class="gantt-track"><div class="gantt-bar gtm-br" style="left:26.2%;width:20%"></div></div>
+          <div class="gantt-track"><div class="gantt-bar gtm-br" style="left:26.23%;width:20%"></div></div>
           <div class="gantt-row-label">GTM · BR · PIX campaign</div>
-          <div class="gantt-track"><div class="gantt-bar gtm-br" style="left:36.4%;width:13.1%"></div></div>
+          <div class="gantt-track"><div class="gantt-bar gtm-br" style="left:36.39%;width:13.11%"></div></div>
           <div class="gantt-row-label">GTM · BR · Sales enablement (Payments + PdV)</div>
-          <div class="gantt-track"><div class="gantt-bar gtm-br" style="left:49.5%;width:10.2%"></div></div>
+          <div class="gantt-track"><div class="gantt-bar gtm-br" style="left:49.51%;width:10.16%"></div></div>
           <div class="gantt-row-label">GTM · AR · Pricing strategy (QR)</div>
-          <div class="gantt-track"><div class="gantt-bar gtm-ar" style="left:14.8%;width:1.6%"></div></div>
+          <div class="gantt-track"><div class="gantt-bar gtm-ar" style="left:14.75%;width:1.64%"></div></div>
           <div class="gantt-row-label">GTM · AR · Product marketing &amp; launch strategy (QR)</div>
-          <div class="gantt-track"><div class="gantt-bar gtm-ar" style="left:26.2%;width:10.2%"></div></div>
+          <div class="gantt-track"><div class="gantt-bar gtm-ar" style="left:26.23%;width:10.16%"></div></div>
           <div class="gantt-row-label">Launch · BR · Pilot launch</div>
-          <div class="gantt-track"><div class="gantt-bar launch-br" style="left:64.9%;width:9.8%"></div></div>
+          <div class="gantt-track"><div class="gantt-bar launch-br" style="left:64.92%;width:9.84%"></div></div>
           <div class="gantt-row-label">Launch · BR · Post-launch review</div>
-          <div class="gantt-track"><div class="gantt-bar launch-br" style="left:74.8%;width:18.7%"></div></div>
+          <div class="gantt-track"><div class="gantt-bar launch-br" style="left:74.75%;width:18.69%"></div></div>
           <div class="gantt-row-label">Launch · AR · Pilot launch (QR)</div>
-          <div class="gantt-track"><div class="gantt-bar launch-ar" style="left:30.2%;width:9.8%"></div></div>
+          <div class="gantt-track"><div class="gantt-bar launch-ar" style="left:40%;width:10.16%"></div></div>
           <div class="gantt-row-label">Launch · AR · Post-launch review (QR)</div>
-          <div class="gantt-track"><div class="gantt-bar launch-ar" style="left:34.8%;width:20%"></div></div>
+          <div class="gantt-track"><div class="gantt-bar launch-ar" style="left:50.49%;width:24.26%"></div></div>
         </div>
         <div class="legend-gantt">
+          <span><span class="dot" style="background:#f59e0b"></span> Stone</span>
+          <span><span class="dot" style="background:#8b5cf6"></span> Development</span>
           <span><span class="dot" style="background:var(--br)"></span> GTM Brazil</span>
           <span><span class="dot" style="background:var(--ar)"></span> GTM Argentina</span>
           <span><span class="dot" style="background:#15803d"></span> Launch Brazil</span>
           <span><span class="dot" style="background:#2563eb"></span> Launch Argentina</span>
         </div>
+        <p class="source-foot" style="margin-top:0.65rem"><strong>* Development</strong> (6 Apr → each country’s launch window): macro bar — <strong>product will break down</strong> milestones inside this span.</p>
       </div>
     </div>
   </section>
@@ -555,16 +872,65 @@
   <section class="slide" id="slide-3" tabindex="-1">
     <div class="slide-inner">
       <p class="kicker">Pricing framework</p>
-      <h1>Core principles</h1>
-      <p class="subtitle">Headlines from <strong>PRICING-PRINCIPLES-AND-SCENARIOS</strong> — details stay in the working doc.</p>
-      <div class="principles-grid">
-        <div class="principle-card"><span class="n">1</span> Maximize offline channel results</div>
-        <div class="principle-card"><span class="n">2</span> Radical simplicity for merchants</div>
-        <div class="principle-card"><span class="n">3</span> Align price communication to ICP reality</div>
-        <div class="principle-card"><span class="n">4</span> Ground list prices in non-promotional market bands</div>
-        <div class="principle-card"><span class="n">5</span> Respect settlement horizon sensitivity</div>
-        <div class="principle-card"><span class="n">6</span> Monitor repricing and conversion jointly</div>
-        <div class="principle-card"><span class="n">7</span> Bundle economics with PoS</div>
+      <h1>Pricing core principles</h1>
+      <p class="subtitle">North star: physical GMV and PDV revenue — keep the bill legible, list anchors honest to the market, and settlement + bundle economics visible where deals get made. One card per principle — <strong>PRICING-PRINCIPLES-AND-SCENARIOS</strong>.</p>
+      <div class="principles-grid-pro">
+        <article class="principle-card-pro">
+          <div class="principle-card-head">
+            <span class="principle-num" aria-hidden="true">1</span>
+            <span class="principle-icon" aria-hidden="true" title="Offline channel">🏪</span>
+            <div class="principle-card-titles"><strong>Maximize offline channel results</strong></div>
+          </div>
+          <p class="principle-why-pro">Measure and monetize in-store GMV and PDV-attributed revenue — not ecommerce checkout metrics.</p>
+        </article>
+        <article class="principle-card-pro">
+          <div class="principle-card-head">
+            <span class="principle-num" aria-hidden="true">2</span>
+            <span class="principle-icon" aria-hidden="true" title="Simplicity">✨</span>
+            <div class="principle-card-titles"><strong>Radical simplicity for merchants</strong></div>
+          </div>
+          <p class="principle-why-pro">Fewer variables → clearer conversion and lighter support; the bill should read in one breath.</p>
+        </article>
+        <article class="principle-card-pro">
+          <div class="principle-card-head">
+            <span class="principle-num" aria-hidden="true">3</span>
+            <span class="principle-icon" aria-hidden="true" title="ICP">🎯</span>
+            <div class="principle-card-titles"><strong>Align price communication to ICP reality</strong></div>
+          </div>
+          <p class="principle-why-pro">Same list can need different framing for different merchant archetypes (per PMM).</p>
+        </article>
+        <article class="principle-card-pro">
+          <div class="principle-card-head">
+            <span class="principle-num" aria-hidden="true">4</span>
+            <span class="principle-icon" aria-hidden="true" title="Benchmarks">📊</span>
+            <div class="principle-card-titles"><strong>Ground list prices in non-promotional market bands</strong></div>
+          </div>
+          <p class="principle-why-pro">Benchmarks must reflect sustainable table stakes — promos distort comparability.</p>
+        </article>
+        <article class="principle-card-pro">
+          <div class="principle-card-head">
+            <span class="principle-num" aria-hidden="true">5</span>
+            <span class="principle-icon" aria-hidden="true" title="Settlement">⏱️</span>
+            <div class="principle-card-titles"><strong>Respect settlement horizon sensitivity</strong></div>
+          </div>
+          <p class="principle-why-pro">Prazo / anticipation shifts effective MDR; pricing and CRM must surface that link.</p>
+        </article>
+        <article class="principle-card-pro">
+          <div class="principle-card-head">
+            <span class="principle-num" aria-hidden="true">6</span>
+            <span class="principle-icon" aria-hidden="true" title="Repricing &amp; conversion">📈</span>
+            <div class="principle-card-titles"><strong>Monitor repricing and conversion jointly</strong></div>
+          </div>
+          <p class="principle-why-pro">Price changes are a product surface — watch funnel and tickets by segment.</p>
+        </article>
+        <article class="principle-card-pro">
+          <div class="principle-card-head">
+            <span class="principle-num" aria-hidden="true">7</span>
+            <span class="principle-icon" aria-hidden="true" title="Full stack">🔗</span>
+            <div class="principle-card-titles"><strong>Bundle economics with PoS</strong></div>
+          </div>
+          <p class="principle-why-pro">Payments on physical GMV is the monetization engine alongside PoS SaaS — not either line in isolation.</p>
+        </article>
       </div>
     </div>
   </section>
@@ -573,32 +939,57 @@
   <section class="slide" id="slide-4" tabindex="-1">
     <div class="slide-inner">
       <p class="kicker">Pricing framework · Steering discussion</p>
-      <h1>Simplicity of the model vs better economic output</h1>
-      <p class="subtitle">Two buckets for committee debate — bullets are starters, not decisions.</p>
-      <div class="framework-split">
-        <div class="bucket">
+      <h1>Where should we put the balance?</h1>
+      <p class="subtitle"><strong>Simplicity of the model</strong> vs <strong>economic precision</strong> — we want offline GMV, NOTR guardrails, and segment fidelity, but <strong>perfect</strong> economics on paper often implies <strong>more plans, dimensions, and exceptions</strong>. This slide frames the tradeoff, with concrete examples.</p>
+      <div class="balance-columns">
+        <div class="balance-pillar">
           <h3>Simplicity of the model</h3>
-          <ul>
-            <li><strong>One bill, one story</strong> — PDV, invoicing, and Nuvem Pago legible on a single narrative (avoid “surprise” lines).</li>
-            <li><strong>Fewer dimensions</strong> — minimize the number of fee levers a store manager must track month to month.</li>
-            <li><strong>CPT vs subscription</strong> — where to absorb complexity internally so the merchant sees a clean stack price.</li>
-            <li><strong>Segment framing</strong> — hybrid vs standalone physical (per PMM) without multiplying SKUs.</li>
-            <li><strong>Sales &amp; support test</strong> — language that reps can quote in one breath; FAQs that match the statement.</li>
-            <li><strong>Migration fairness</strong> — grandfathering and credits explained in one short policy, not case-by-case noise.</li>
-          </ul>
+          <div class="tri-box">
+            <h4>Description</h4>
+            <p>Illustrations from the working doc: <strong>CPT waiver</strong> when merchants adopt Nuvem Pago (cleaner stack, monetization shifts to spread). <strong>Invoicing inside CPT</strong> instead of a separate per-invoice line. Also: how many distinct <strong>offline / PDV commercial plans</strong> we expose — each additional plan is another story for sales, support, and the statement.</p>
+          </div>
+          <div class="tri-box">
+            <h4>Pros</h4>
+            <ul>
+              <li>Faster merchant comprehension; fewer billing disputes.</li>
+              <li>Easier enablement — one narrative from marketing to CS.</li>
+              <li>Lower operational load (fewer edge cases in tooling).</li>
+            </ul>
+          </div>
+          <div class="tri-box">
+            <h4>Cons</h4>
+            <ul>
+              <li>May blur segment-level economics (who subsidizes whom).</li>
+              <li>Harder to tune NOTR or ARPU per micro-segment inside one simple facade.</li>
+              <li>Risk of leaving money on the table if simplicity caps variable upside.</li>
+            </ul>
+          </div>
         </div>
-        <div class="bucket">
+        <div class="balance-pillar">
           <h3>Better economic output</h3>
-          <ul>
-            <li><strong>North star</strong> — optimize <strong>offline GMV</strong> and <strong>offline revenue</strong> through PDV-led in-store commerce (not ecommerce take rate).</li>
-            <li><strong>Full-stack bundle</strong> — PoS SaaS + payments spread; avoid tuning either line in isolation.</li>
-            <li><strong>NOTR / margin guardrails</strong> — consistency with 2026 BC and acquirer economics (Stone, dLocal, etc.).</li>
-            <li><strong>Settlement &amp; anticipation</strong> — effective MDR surfaced in CRM and quoting so credit economics are not opaque.</li>
-            <li><strong>List anchors</strong> — non-promotional market bands; Upmarket vs SMB baselines for scenario planning.</li>
-            <li><strong>Repricing loop</strong> — after material price moves, joint review of conversion and support signals by segment.</li>
-          </ul>
+          <div class="tri-box">
+            <h4>Description</h4>
+            <p>North star remains <strong>offline GMV and offline revenue</strong>; we still want <strong>NOTR guardrails</strong>, <strong>list anchors</strong> from non-promo bands, <strong>settlement/anticipation</strong> visible in quoting, and a <strong>repricing ↔ conversion</strong> loop. The tension: hitting those targets <strong>exactly</strong> on every segment often requires <strong>more granularity</strong> — more plans, riders, or exceptions — than a “one bill” ideal allows.</p>
+          </div>
+          <div class="tri-box">
+            <h4>Pros</h4>
+            <ul>
+              <li>Tighter alignment to BC, acquirer costs, and segment LTV.</li>
+              <li>Room to reflect Upmarket vs SMB and country reality in price.</li>
+              <li>Clearer internal P&amp;L ownership per lever.</li>
+            </ul>
+          </div>
+          <div class="tri-box">
+            <h4>Cons</h4>
+            <ul>
+              <li>Higher cognitive load; more “surprise” risk on the statement.</li>
+              <li>Support and sales friction; longer quote cycles.</li>
+              <li>Complexity debt — every new lever is a product surface to maintain.</li>
+            </ul>
+          </div>
         </div>
       </div>
+      <p class="source-foot" style="margin-top:1rem"><strong>Committee question:</strong> Where on this spectrum do we anchor for <strong>2026</strong> — maximum simplicity, maximum economic precision, or a deliberate hybrid (e.g. simple facade + controlled back-end segmentation)?</p>
     </div>
   </section>
 
@@ -607,7 +998,7 @@
       var links = document.querySelectorAll(".deck-nav a[data-nav]");
       var slides = document.querySelectorAll(".slide[id]");
       function setCurrent() {
-        var id = "slide-0";
+        var id = "slide-cover";
         slides.forEach(function (s) {
           var r = s.getBoundingClientRect();
           if (r.top <= 120 && r.bottom > 140) id = s.id;
