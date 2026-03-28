@@ -6,7 +6,7 @@ Typography: **Montserrat** (slide titles / kickers) + **Roboto** (body, tables, 
 Both are on the Google Slides font list and read closer to modern web decks than Arial.
 
 Layout: explicit table column widths (~58% label / ~42% values) and row heights so
-12–13pt text fits without overlapping the footer. Principles: one slide, 4+3 compact cards.
+12–13pt text fits without overlapping the footer. Principles: one slide, 3+2 compact cards.
 
 Cover slide: light blue background + navy type (aligned with HTML); decorative ovals on the right.
 
@@ -645,15 +645,13 @@ def build() -> None:
     p0.font.color.rgb = MUTED
     _font_body(p0)
 
-    # --- Principles: single slide, 4 + 3 tight grid (matches HTML cards) ---
+    # --- Principles: single slide, 3 + 2 grid (matches HTML cards; items 4–5 from prior list removed) ---
     principles: list[tuple[str, str, str, str]] = [
         ("1", "🏪", "Maximize offline channel results", "Measure in-store GMV & PDV-attributed revenue — not ecommerce."),
         ("2", "✨", "Radical simplicity for merchants", "Fewer variables; bill readable in one breath."),
         ("3", "🎯", "Align price communication to ICP reality", "Same list, different framing per archetype (PMM)."),
-        ("4", "📊", "Ground list prices in non-promotional market bands", "Sustainable benchmarks; promos distort comparability."),
-        ("5", "⏱️", "Respect settlement horizon sensitivity", "Prazo/anticipation ↔ effective MDR; surface in CRM."),
-        ("6", "📈", "Monitor repricing and conversion jointly", "Price = product surface; watch funnel & tickets by segment."),
-        ("7", "🔗", "Bundle economics with PoS", "Payments on physical GMV + PoS SaaS — not either line alone."),
+        ("4", "📈", "Monitor repricing and conversion jointly", "Price = product surface; watch funnel & tickets by segment."),
+        ("5", "🔗", "Bundle economics with PoS", "Payments on physical GMV + PoS SaaS — not either line alone."),
     ]
 
     slide_p1 = prs.slides.add_slide(prs.slide_layouts[6])
@@ -663,8 +661,8 @@ def build() -> None:
     sub_p1 = slide_p1.shapes.add_textbox(Inches(0.55), Inches(0.8), Inches(12.15), Inches(0.95))
     sp1 = sub_p1.text_frame.paragraphs[0]
     sp1.text = (
-        "North star: physical GMV and PDV revenue — keep the bill legible, list anchors honest to the market, "
-        "and settlement + bundle economics visible where deals get made."
+        "North star: physical GMV and PDV revenue — keep bills legible for merchants, and track repricing, "
+        "conversion, and PoS + payments economics together."
     )
     sp1.font.size = Pt(PT_PRINCIPLES_SUB)
     sp1.font.color.rgb = MUTED
@@ -674,22 +672,21 @@ def build() -> None:
     gap_x = 0.1
     inner_w = 12.333  # 13.333 - 0.5 - 0.5
     left_m = 0.5
-    w4 = (inner_w - 3 * gap_x) / 4
-    w3 = (inner_w - 2 * gap_x) / 3
-    # Taller cards + lower start so 12/11pt body fills the slide (less empty band below)
+    w3_row = (inner_w - 2 * gap_x) / 3
+    w2_row = (inner_w - gap_x) / 2
     y1 = 1.78
     card_h = 2.12
     row_gap = 0.1
     y2 = y1 + card_h + row_gap
 
-    for i in range(4):
+    for i in range(3):
         num, icon, title, why = principles[i]
-        x = left_m + i * (w4 + gap_x)
+        x = left_m + i * (w3_row + gap_x)
         _principle_card(
             slide_p1,
             x,
             y1,
-            w4,
+            w3_row,
             card_h,
             num,
             icon,
@@ -699,14 +696,14 @@ def build() -> None:
             body_pt=PT_PRIN_COMPACT_BODY,
             line_before_body=7,
         )
-    for i in range(3):
-        num, icon, title, why = principles[4 + i]
-        x = left_m + i * (w3 + gap_x)
+    for i in range(2):
+        num, icon, title, why = principles[3 + i]
+        x = left_m + i * (w2_row + gap_x)
         _principle_card(
             slide_p1,
             x,
             y2,
-            w3,
+            w2_row,
             card_h,
             num,
             icon,
@@ -777,8 +774,8 @@ def build() -> None:
     sim_pros = "Faster merchant comprehension; easier enablement; lower ops load on edge cases."
     sim_cons = "May blur who subsidizes whom; harder to micro-tune NOTR per segment; risk of leaving revenue on the table."
     eco_desc = (
-        "North star: offline GMV & revenue. We still want NOTR guardrails, non-promo list anchors, settlement visible in quoting, "
-        "and a repricing loop — but perfect economics on every segment often requires more granularity than a single simple facade."
+        "North star: offline GMV & revenue. We still want NOTR guardrails, a repricing loop, and segment fidelity in quotes — "
+        "but perfect economics on every segment often requires more granularity than a single simple facade."
     )
     eco_pros = "Tighter BC & acquirer alignment; room for Upmarket vs SMB; clearer internal P&L per lever."
     eco_cons = "Higher cognitive load; support/sales friction; quote-cycle length; complexity debt on every new lever."

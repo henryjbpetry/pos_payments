@@ -482,16 +482,26 @@
       gap: 0.85rem;
     }
     @media (min-width: 1000px) {
+      /* 3 + 2 layout: top row full width; bottom row two cards centered */
       .principles-grid-pro {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(6, 1fr);
       }
-      .principle-card-pro:nth-child(7) {
-        grid-column: 2;
+      .principle-card-pro:nth-child(1),
+      .principle-card-pro:nth-child(2),
+      .principle-card-pro:nth-child(3) {
+        grid-column: span 2;
+      }
+      .principle-card-pro:nth-child(4) {
+        grid-column: 2 / span 2;
+      }
+      .principle-card-pro:nth-child(5) {
+        grid-column: 4 / span 2;
       }
     }
     @media (max-width: 640px) {
       .principles-grid-pro { grid-template-columns: 1fr; }
-      .principle-card-pro:nth-child(7) { grid-column: auto; }
+      .principle-card-pro:nth-child(4),
+      .principle-card-pro:nth-child(5) { grid-column: auto; }
     }
     .principle-card-pro {
       background: linear-gradient(145deg, rgba(255, 255, 255, 0.07) 0%, rgba(255, 255, 255, 0.03) 100%);
@@ -873,7 +883,7 @@
     <div class="slide-inner">
       <p class="kicker">Pricing framework</p>
       <h1>Pricing core principles</h1>
-      <p class="subtitle">North star: physical GMV and PDV revenue — keep the bill legible, list anchors honest to the market, and settlement + bundle economics visible where deals get made. One card per principle — <strong>PRICING-PRINCIPLES-AND-SCENARIOS</strong>.</p>
+      <p class="subtitle">North star: physical GMV and PDV revenue — keep bills legible for merchants, and track repricing, conversion, and PoS + payments economics together. One card per principle — <strong>PRICING-PRINCIPLES-AND-SCENARIOS</strong>.</p>
       <div class="principles-grid-pro">
         <article class="principle-card-pro">
           <div class="principle-card-head">
@@ -902,22 +912,6 @@
         <article class="principle-card-pro">
           <div class="principle-card-head">
             <span class="principle-num" aria-hidden="true">4</span>
-            <span class="principle-icon" aria-hidden="true" title="Benchmarks">📊</span>
-            <div class="principle-card-titles"><strong>Ground list prices in non-promotional market bands</strong></div>
-          </div>
-          <p class="principle-why-pro">Benchmarks must reflect sustainable table stakes — promos distort comparability.</p>
-        </article>
-        <article class="principle-card-pro">
-          <div class="principle-card-head">
-            <span class="principle-num" aria-hidden="true">5</span>
-            <span class="principle-icon" aria-hidden="true" title="Settlement">⏱️</span>
-            <div class="principle-card-titles"><strong>Respect settlement horizon sensitivity</strong></div>
-          </div>
-          <p class="principle-why-pro">Prazo / anticipation shifts effective MDR; pricing and CRM must surface that link.</p>
-        </article>
-        <article class="principle-card-pro">
-          <div class="principle-card-head">
-            <span class="principle-num" aria-hidden="true">6</span>
             <span class="principle-icon" aria-hidden="true" title="Repricing &amp; conversion">📈</span>
             <div class="principle-card-titles"><strong>Monitor repricing and conversion jointly</strong></div>
           </div>
@@ -925,7 +919,7 @@
         </article>
         <article class="principle-card-pro">
           <div class="principle-card-head">
-            <span class="principle-num" aria-hidden="true">7</span>
+            <span class="principle-num" aria-hidden="true">5</span>
             <span class="principle-icon" aria-hidden="true" title="Full stack">🔗</span>
             <div class="principle-card-titles"><strong>Bundle economics with PoS</strong></div>
           </div>
@@ -969,7 +963,7 @@
           <h3>Better economic output</h3>
           <div class="tri-box">
             <h4>Description</h4>
-            <p>North star remains <strong>offline GMV and offline revenue</strong>; we still want <strong>NOTR guardrails</strong>, <strong>list anchors</strong> from non-promo bands, <strong>settlement/anticipation</strong> visible in quoting, and a <strong>repricing ↔ conversion</strong> loop. The tension: hitting those targets <strong>exactly</strong> on every segment often requires <strong>more granularity</strong> — more plans, riders, or exceptions — than a “one bill” ideal allows.</p>
+            <p>North star remains <strong>offline GMV and offline revenue</strong>; we still want <strong>NOTR guardrails</strong>, a <strong>repricing ↔ conversion</strong> loop, and clarity on how commercial terms show up in quotes and P&amp;L. The tension: hitting segment targets <strong>exactly</strong> often requires <strong>more granularity</strong> — more plans, riders, or exceptions — than a “one bill” ideal allows.</p>
           </div>
           <div class="tri-box">
             <h4>Pros</h4>
